@@ -6,7 +6,7 @@ const Form = () => {
     const { handleSubmit, register } = useForm();
 
     const test = (data) => {
-console.log(data)
+        console.log(data)
     }
 
     return (
