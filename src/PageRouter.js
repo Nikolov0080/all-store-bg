@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes } from 'react-router-dom';
 
 
-const Router = () => {
+const PageRouter = () => {
     return (
         <div>
 
@@ -10,4 +10,4 @@ const Router = () => {
     )
 }
 
-export default Router
+export default PageRouter
