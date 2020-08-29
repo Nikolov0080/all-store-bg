@@ -1,10 +1,14 @@
 import React from 'react';
 import Form from './Views/form';
+import PageLayout from './Views/pageLayout/pageLayout';
 
 function App() {
   return (
     <div className="App">
-   <Form />
+      <PageLayout>
+
+        <Form />
+      </PageLayout>
     </div>
   );
 }
