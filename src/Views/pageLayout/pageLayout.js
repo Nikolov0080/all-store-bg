@@ -11,4 +11,4 @@ const PageLayout = (props) => {
     )
 }
 
-export default PageLayout
+export default PageLayout;

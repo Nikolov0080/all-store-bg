@@ -4,7 +4,7 @@ import navLinks from './navLinks';
 
 const Navigation = () => {
 
-const links = navLinks(false); // change for user
+const links = navLinks(true); // change for user
 
     return (
         <div>
