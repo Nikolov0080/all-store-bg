@@ -1,17 +1,18 @@
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap';
 import navLinks from './navLinks';
+import {NavLink } from 'react-router-dom';
 
 const Navigation = () => {
 
-const links = navLinks(true); // change for user
+    const links = navLinks(false); // change for user
 
     return (
         <div>
             <Navbar variant="dark">
                 <Nav >
-                    {links.map((link,index)=>{
-                  return  <Nav.Link key={index} href={link.link}>{link.name}</Nav.Link>
+                    {links.map((link, index) => {
+                        return <Nav.Link style={{fontSize:"20px"}} as={NavLink} key={index} to={link.link}>{link.name} </Nav.Link> 
                     })}
                 </Nav>
             </Navbar>
