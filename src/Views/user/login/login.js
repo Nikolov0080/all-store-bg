@@ -1,28 +1,46 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import Context from '../../../context/context';
+import Input from '../../components/input/input';
 
 const Login = () => {
 
     const { handleSubmit, register } = useForm();
     const context = useContext(Context);
-    console.log(context);
 
-    const login = () => {
-        context.signIn()
-    }
+    useEffect(() => {
+        console.log(context);
+    }, [context])
 
-    const logout = () => {
-        context.signOut()
+    const submitForm = (data) => {
+        console.log(data)
     }
     return (
-        <div>
-            <Button onClick={login}>login</Button>
-            <Button onClick={logout}>logOut</Button>
+        <div className="text-center">
+            <Card >
+                <Card.Header>Sign in </Card.Header>
+                <form onSubmit={handleSubmit(submitForm)}>
 
+                    <Input
+                        name="email"
+                        reg={register}
+                        placeholder="Email"
+                        type="email"
+                    />
+
+                    <Input
+                        name="password"
+                        reg={register}
+                        placeholder="Password"
+                        type="password"
+                    />
+
+                    <Button type="submit" variant="success">Submit</Button>
+                </form>
+            </Card>
         </div>
     )
 }
 
-export default Login
+export default Login;
