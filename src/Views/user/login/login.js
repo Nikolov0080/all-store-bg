@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
 import { Button, Card } from 'react-bootstrap';
 import Context from '../../../context/context';
@@ -7,15 +7,12 @@ import Input from '../../components/input/input';
 const Login = () => {
 
     const { handleSubmit, register } = useForm();
-    const context = useContext(Context);
-
-    useEffect(() => {
-        console.log(context);
-    }, [context])
+    // const context = useContext(Context);
 
     const submitForm = (data) => {
         console.log(data)
     }
+
     return (
         <div className="text-center">
             <Card >
