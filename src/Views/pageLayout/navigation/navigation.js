@@ -9,10 +9,10 @@ const Navigation = () => {
 
     return (
         <div>
-            <Navbar variant="dark">
+            <Navbar className="nav justify-content-center" variant="dark">
                 <Nav >
                     {links.map((link, index) => {
-                        return <Nav.Link style={{fontSize:"20px"}} as={NavLink} key={index} to={link.link}>{link.name} </Nav.Link> 
+                        return <Nav.Link style={{fontSize:"20px",paddingLeft:'20px',paddingRight:"20px"}} as={NavLink} key={index} to={link.link}>{link.name} </Nav.Link> 
                     })}
                 </Nav>
             </Navbar>
