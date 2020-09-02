@@ -9,10 +9,8 @@ const Navigation = () => {
 
     const context = useContext(Context);
 
-    const user = context.user;
-
-    const links = navLinks(user); // change for user
-
+    const links = navLinks(context.user); 
+     
     return (
         <div>
             <Navbar className="nav justify-content-center" variant="dark">
