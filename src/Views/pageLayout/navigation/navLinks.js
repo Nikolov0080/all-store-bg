@@ -1,6 +1,6 @@
 
 export default (user) => {
-    if (!user) {
+    if (user === null) {
         return [
             {
                 link: '/',

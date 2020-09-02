@@ -3,14 +3,15 @@ import { Navbar, Nav } from 'react-bootstrap';
 import navLinks from './navLinks';
 import { NavLink } from 'react-router-dom';
 import Context from '../../../context/context';
+import '../../../firebase/SDK';
 
 const Navigation = () => {
 
     const context = useContext(Context);
-    console.log(context)
 
+    const user = context.user;
 
-    const links = navLinks(false); // change for user
+    const links = navLinks(user); // change for user
 
     return (
         <div>
@@ -25,4 +26,4 @@ const Navigation = () => {
     )
 }
 
-export default Navigation
+export default Navigation;
