@@ -1,16 +1,17 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
 import { Button, Card } from 'react-bootstrap';
-import Context from '../../../context/context';
 import Input from '../../components/input/input';
+import firebaseLogin from '../../../firebase/models/user/login/login';
 
 const Login = () => {
 
     const { handleSubmit, register } = useForm();
-    // const context = useContext(Context);
 
-    const submitForm = (data) => {
-        console.log(data)
+    const submitForm = ({ email, password }) => {
+
+        firebaseLogin(email, password).then(resp => console.log(resp))
+
     }
 
     return (

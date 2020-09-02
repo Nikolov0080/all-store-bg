@@ -1,20 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Context from './context/context';
 import firebase from 'firebase';
-import userStatus from './firebase/userStatus';
+import { Spinner } from 'react-bootstrap';
+import './firebase/SDK';
 
 const SessionContext = (props) => {
 
-    const [user, setUser] = useState('GUEST_USER');
+    const [user, setUser] = useState('GUEST');
+    const [loading,setLoading] = useState(true)
 
-    userStatus(setUser).then(a=>console.log(a))
-
-    const signIn = (userData) => {
-        return setUser("LOGGED")
+    const signIn = (data) => {
+        return setUser(data)
     }
 
     const signOut = () => {
-        setUser("GUEST_USER")
+        setUser("GUEST")
+    }
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            setUser(user);
+            setLoading(false);
+        } else {
+            setUser(null)
+            setLoading(false);
+        }
+    });
+
+    if (loading) {
+        return (
+            <div className="text-center mt-5">
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+            </div>
+        )
     }
 
     return (
@@ -31,4 +51,4 @@ const SessionContext = (props) => {
     )
 }
 
-export default SessionContext
+export default SessionContext;
