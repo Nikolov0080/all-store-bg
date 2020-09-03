@@ -40,8 +40,6 @@ const ProductList = (props) => {
             condition: "new",
             createdAt: '12.06.2021'
         }
-
-
     ]
 
     return (

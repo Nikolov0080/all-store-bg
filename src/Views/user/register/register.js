@@ -10,10 +10,10 @@ const Register = () => {
 
     const { handleSubmit, register, watch, errors } = useForm();
 
-    const submitForm = ({ username, email, password, rePassword }) => {
+    const submitForm = ({ username, email, password}) => {
 
         console.log(username)
-        firebaseRegister(email, password)
+        firebaseRegister(email, password,username)
 
     }
     return (
