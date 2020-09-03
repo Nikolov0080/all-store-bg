@@ -1,11 +1,12 @@
 import React from 'react';
-import { Card, Button ,Row,Col} from 'react-bootstrap';
+import { Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './productList.module.css';
-import test from './test.jpg'
+import test from './test.jpg';
+
 const ProductList = (props) => {
 
-    const pathToDetails = `/products/productName`;
+    const path = `/products/`;
 
     const products = [
         {
@@ -14,7 +15,8 @@ const ProductList = (props) => {
             description: 'hdask hjkfsdfsdfsdfsfsdfsdfsdfsdf dfsdfsdfhdkj ashd kj',
             price: 40,
             condition: "new",
-            createdAt: '12.06.2021'
+            createdAt: '12.06.2021',
+            creator: "Gencho"
         },
         {
             image: test,
@@ -22,7 +24,8 @@ const ProductList = (props) => {
             description: 'h123 shdjashdkj ashd kj',
             price: 10,
             condition: "new",
-            createdAt: '12.06.2021'
+            createdAt: '12.06.2021',
+            creator: "Mincho"
         },
         {
             image: test,
@@ -30,7 +33,8 @@ const ProductList = (props) => {
             description: 'h232 fds hjkashdjashdkj ashd kj',
             price: 402,
             condition: "new",
-            createdAt: '12.06.2021'
+            createdAt: '12.06.2021',
+            creator: "Goshko"
         },
         {
             image: test,
@@ -38,40 +42,37 @@ const ProductList = (props) => {
             description: 'hdask hjkashdjashdkj ashd kj',
             price: 650,
             condition: "new",
-            createdAt: '12.06.2021'
+            createdAt: '12.06.2021',
+            creator: "Ivan"
         }
     ]
 
     return (
         <div>
             Product list
-
             <Row >
-                {products.map(({ image, title, price, description }, index) => {
-
+                {products.map(({ image, title, price, description, creator }, index) => {
                     return (
-                    <Col md key={index}>
+                        <Col md key={index}>
+                            <Card className={style.size}>
+                                <Card.Img className={style} variant="top" src={image} />
+                                <Card.Body>
+                                    <Card.Title>{title}</Card.Title>
 
-                    <Card  className={style.size}>
-                            <Card.Img className={style} variant="top" src={image} />
-                            <Card.Body>
-                                <Card.Title>{title}</Card.Title>
-                            
-                                <Card.Footer className="text-center">
-                                    Price: {price}
-                                </Card.Footer>
-                                <Button variant="primary">
-                                    <Link to={pathToDetails}>View details</Link>
-                                </Button>
-                            </Card.Body>
-                        </Card>
-                     </Col>
-                )
-
-
+                                    <Card.Footer className="text-center">
+                                        <Card.Text>Price: {price}   </Card.Text> 
+                                        <Card.Text>Posted by : [ {creator} ]</Card.Text>
+                                    </Card.Footer>
+                                    <Button variant="primary">
+                                        {/* use the product name or identifier to set path to details page */}
+                                        <Link to={path + creator.toLowerCase()}>View details</Link>
+                                    </Button>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    )
                 })}
             </Row>
-
         </div>
     )
 }
