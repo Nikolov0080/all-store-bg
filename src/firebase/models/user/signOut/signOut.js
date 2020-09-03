@@ -1,7 +1,5 @@
 import firebase from 'firebase';
-import '../../../SDK'
-
-
+import '../../../SDK';
 
 const signOut = () => { return firebase.auth().signOut(); }
-export default signOut 
+export default signOut; 

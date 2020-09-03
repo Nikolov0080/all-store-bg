@@ -9,14 +9,14 @@ const Navigation = () => {
 
     const context = useContext(Context);
 
-    const links = navLinks(context.user); 
-     
+    const links = navLinks(context.user);
+
     return (
-        <div>
-            <Navbar className="nav justify-content-center" variant="dark">
+        <div >
+            <Navbar expand="sm" sticky="top" className="nav justify-content-center text-center" variant="dark">
                 <Nav >
                     {links.map((link, index) => {
-                        return <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px" }} as={NavLink} key={index} to={link.link}>{link.name} </Nav.Link>
+                        return <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px",  }} as={NavLink} key={index} to={link.link}>{link.name} </Nav.Link>
                     })}
                 </Nav>
             </Navbar>

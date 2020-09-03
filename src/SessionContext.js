@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Context from './context/context';
 import firebase from 'firebase';
 import { Spinner } from 'react-bootstrap';

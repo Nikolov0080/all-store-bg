@@ -1,9 +1,11 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
+import  style from './footer.module.css';
+
 const Footer = (props) => {
     return (
         <div >
-            <Card>
+            <Card className={style.footer}>
                 <Card.Header>Featured</Card.Header>
                 <Card.Body>
                     {/* <Card.Title>Special title treatment</Card.Title> */}

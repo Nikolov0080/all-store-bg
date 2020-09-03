@@ -1,0 +1,9 @@
+.size{
+    width:20em
+}
+
+@media only screen and (max-width: 500px) {
+  .size {
+     width:auto;
+    }
+  }

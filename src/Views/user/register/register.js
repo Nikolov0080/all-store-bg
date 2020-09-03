@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-// import Context from '../../../context/context';
+import React from 'react'
 import { Button, Card } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import Input from '../../components/input/input';
@@ -10,8 +9,6 @@ import ErrMsg from './errMsg';
 const Register = () => {
 
     const { handleSubmit, register, watch, errors } = useForm();
-
-    // const context = useContext(Context);
 
     const submitForm = ({ username, email, password, rePassword }) => {
 
