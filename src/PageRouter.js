@@ -7,7 +7,7 @@ import Profile from './Views/user/profile/profile';
 import Products from './Views/main/productList/productList';
 import PageLayout from './Views/pageLayout/pageLayout';
 import ProductDetails from './Views/main/productDetails/productDetails';
-
+import AddProduct from './Views/user/addProduct/addProduct';
 import ProtectedRoute from './protectedRoutes/user';
 import ProtectedRouteGuest from './protectedRoutes/guest';
 
@@ -23,6 +23,7 @@ const PageRouter = () => {
                         <ProtectedRouteGuest exact path="/profile" component={Profile} />
                         <ProtectedRouteGuest exact path="/products" component={Products} />
                         <ProtectedRouteGuest exact path="/products/:product" component={ProductDetails} />
+                        <ProtectedRouteGuest exact path="/add-product" component={AddProduct} />
 
                         {/* ADD PRODUCT DETAILS LATER ON ! */}
                     </Switch>

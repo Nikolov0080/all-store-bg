@@ -1,0 +1,10 @@
+.area{
+    width:30%
+}
+
+
+@media only screen and (max-width: 600px) {
+    .area {
+      width:80%
+    }
+  }
