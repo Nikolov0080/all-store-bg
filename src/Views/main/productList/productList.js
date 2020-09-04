@@ -1,13 +1,22 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './productList.module.css';
 import test from './test.jpg';
+import Context from '../../../context/context';
+import getProducts from '../../../firebase/models/products/getProducts/getProducts';
+
+
 
 const ProductList = (props) => {
 
+    
+    const context = useContext(Context);
+    console.log(context)
     const path = `/products/`;
-
+    
+    const allProducts = getProducts();
+    console.log(allProducts)
     const products = [
         {
             image: test,

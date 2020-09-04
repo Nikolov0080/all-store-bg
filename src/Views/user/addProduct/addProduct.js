@@ -25,10 +25,6 @@ const AddProduct = () => {
             <h3>Add your product</h3>
             <form onSubmit={handleSubmit(addProduct)}>
 
-                {errors.title && errors.title.type === "required" && <ErrMsg message="Title is required" />}
-                {errors.title && errors.title.type === "minLength" && <ErrMsg message="Title must be 6 characters long" />}
-                {errors.title && errors.title.type === "maxLength" && <ErrMsg message="Title must be less than 20" />}
-
                 <Input
                     type="text"
                     name="title"
@@ -40,8 +36,9 @@ const AddProduct = () => {
                     })}
                 />
 
-                {errors.price && errors.price.type === "required" && <ErrMsg message="Price is required" />}
-                {errors.price && errors.price.type === "maxLength" && <ErrMsg message="Price can't be over 1 000 000" />}
+                    {errors.title && errors.title.type === "required" && <ErrMsg message="Product title is required" />}
+                    {errors.title && errors.title.type === "minLength" && <ErrMsg message="Title must be 6 characters long" />}
+                    {errors.title && errors.title.type === "maxLength" && <ErrMsg message="Title must be less than 20" />}
 
                 <Input
                     type="number"
@@ -51,12 +48,10 @@ const AddProduct = () => {
                         required: true,
                         maxLength: 5
                     })}
-                />
+                    />
 
-                {errors.description && errors.description.type === "required" && <ErrMsg message="Description is required" />}
-                {errors.description && errors.description.type === "minLength" && <ErrMsg message="Description must be at least 10 characters long" />}
-                {errors.description && errors.description.type === "maxLength" && <ErrMsg message="Description can't be over 550 symbols" />}
-
+                    {errors.price && errors.price.type === "required" && <ErrMsg message="Price is required" />}
+                    {errors.price && errors.price.type === "maxLength" && <ErrMsg message="Price can't be over 1 000 000" />}
 
                 <TextArea
                     type="text"
@@ -67,12 +62,17 @@ const AddProduct = () => {
                         minLength: 10,
                         maxLength: 550
                     })}
-                />
+                    />
+           
+                    {errors.description && errors.description.type === "required" && <ErrMsg message="Description is required" />}
+                    {errors.description && errors.description.type === "minLength" && <ErrMsg message="Description must be at least 10 characters long" />}
+                    {errors.description && errors.description.type === "maxLength" && <ErrMsg message="Description can't be over 550 symbols" />}
 
                 <Dropdown
                     name="condition"
                     reg={register}
                 />
+
 
                 <Input
                     type="file"
@@ -80,11 +80,13 @@ const AddProduct = () => {
                     reg={register({
                         required: true,
                         validate: (value)=>{
-                            console.log(value[0].size)
+                         return   value[0].size <= 5000000
                         }
                     })}
                 />
 
+                {errors.image && errors.image.type === "validate" && <ErrMsg message="Image must be under 5MB" />}
+                {errors.image && errors.image.type === "required" && <ErrMsg message="Image is required" />}
 
                 <Button type="submit" variant="success">Add</Button>
             </form>
@@ -93,4 +95,4 @@ const AddProduct = () => {
     )
 }
 
-export default AddProduct
+export default AddProduct;

@@ -5,7 +5,9 @@ const login = (email, password) => {
         console.log(error.code);
         return false;
     }).then((resp) => {
-        console.log(resp);
+        if (resp === false) {
+            return false
+        }
         return true;
     })
 }

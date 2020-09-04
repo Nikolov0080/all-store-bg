@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Button, Card } from 'react-bootstrap';
 import Input from '../../components/input/input';
 import firebaseLogin from '../../../firebase/models/user/login/login';
+import ErrMsg from './errMsg';
 
 const Login = () => {
 
     const { handleSubmit, register } = useForm();
-
+    const [err, setErr] = useState(false);
     const submitForm = ({ email, password }) => {
 
-        firebaseLogin(email, password).then(resp => console.log(resp))
+        firebaseLogin(email, password).then((resp) =>{
+            if(resp === false){
+                setErr('Nu suck user, or wrong Email or Password')
+            }
+            console.log(resp)
+        })
 
     }
 
@@ -18,6 +24,8 @@ const Login = () => {
         <div className="text-center">
             <Card >
                 <Card.Header>Sign in </Card.Header>
+                {err !== false ? <ErrMsg message={err}/>: ''}
+                
                 <form onSubmit={handleSubmit(submitForm)}>
 
                     <Input
