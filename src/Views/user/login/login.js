@@ -15,7 +15,6 @@ const Login = () => {
             if(resp === false){
                 setErr('Nu suck user, or wrong Email or Password')
             }
-            console.log(resp)
         })
 
     }
