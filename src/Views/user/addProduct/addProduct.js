@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
 import { Button } from 'react-bootstrap';
 import Input from '../../components/input/input';
 import TextArea from '../../components/textArea/textArea';
 import Dropdown from '../../components/dropdownSelect/dropdownSelect';
 import firebaseCreateProduct from '../../../firebase/models/products/createProduct/createProduct';
+import Context from '../../../context/context';
 
 const AddProduct = () => {
 
+    const context = useContext(Context);
     const { handleSubmit, register } = useForm();
 
     const addProduct = (data) => {
-        firebaseCreateProduct(data);
+        firebaseCreateProduct({
+            ...data,
+            userId: context.user.uid
+        });
     }
 
     return (
