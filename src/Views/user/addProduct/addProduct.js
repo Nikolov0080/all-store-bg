@@ -24,23 +24,29 @@ const AddProduct = () => {
                     placeholder="Product title"
                     reg={register}
                 />
-               <Input
-                   type="number"
-                   name="price"
-                   placeholder="Price (only numbers)"
-                   reg={register}
-               />
-               <TextArea
-               type="text"
-               name="description"
-               placeholder="Type your product description min 20 characters"
-               reg={register}
-               />
+                <Input
+                    type="number"
+                    name="price"
+                    placeholder="Price (only numbers)"
+                    reg={register}
+                />
+                <TextArea
+                    type="text"
+                    name="description"
+                    placeholder="Type your product description min 20 characters"
+                    reg={register}
+                />
 
-<Dropdown 
-name="condition"
-reg={register}
-/>
+                <Dropdown
+                    name="condition"
+                    reg={register}
+                />
+
+                <Input
+                type="file"
+                name="image"
+                reg={register}
+                />
 
 
                 <Button type="submit" variant="success">Add</Button>

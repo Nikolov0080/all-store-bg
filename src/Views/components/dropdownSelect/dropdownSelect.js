@@ -2,7 +2,7 @@ import React from 'react'
 import style from './dds.module.css';
 import { Form } from 'react-bootstrap';
 
-const Dropdown = ({ name, reg }) => {
+const Dropdown = ({ name, reg, placeholder ,label}) => {
     return (
         <div>
 
@@ -11,12 +11,11 @@ const Dropdown = ({ name, reg }) => {
                 as="select"
                 name={name}
                 ref={reg}
+                placeholder={placeholder}
             >
-                <option>Default select</option>
-                <option>Default select</option>
-                <option>Default select</option>
-                <option>Default select</option>
-                <option>Default select</option>
+                <option>Brand new</option>
+                <option>Used - like new</option>
+                <option>Used</option>
             </Form.Control>
         </div>
     )

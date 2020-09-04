@@ -1,3 +1,10 @@
 .drop{
-    width:80%
+    width:30%;
+    margin: 0 auto
 }
+
+@media only screen and (max-width: 600px) {
+    .drop{
+      width:80%
+    }
+  }
