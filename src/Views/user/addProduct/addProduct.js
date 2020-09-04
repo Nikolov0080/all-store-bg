@@ -6,11 +6,12 @@ import TextArea from '../../components/textArea/textArea';
 import Dropdown from '../../components/dropdownSelect/dropdownSelect';
 import firebaseCreateProduct from '../../../firebase/models/products/createProduct/createProduct';
 import Context from '../../../context/context';
+import ErrMsg from './errMsg';
 
 const AddProduct = () => {
 
     const context = useContext(Context);
-    const { handleSubmit, register } = useForm();
+    const { handleSubmit, register, errors } = useForm();
 
     const addProduct = (data) => {
         firebaseCreateProduct({
@@ -23,23 +24,49 @@ const AddProduct = () => {
         <div className="text-center">
             <h3>Add your product</h3>
             <form onSubmit={handleSubmit(addProduct)}>
+
+                {errors.title && errors.title.type === "required" && <ErrMsg message="Title is required" />}
+                {errors.title && errors.title.type === "minLength" && <ErrMsg message="Title must be 6 characters long" />}
+                {errors.title && errors.title.type === "maxLength" && <ErrMsg message="Title must be less than 20" />}
+
                 <Input
                     type="text"
                     name="title"
                     placeholder="Product title"
-                    reg={register}
+                    reg={register({
+                        required: true,
+                        minLength: 6,
+                        maxLength: 20,
+                    })}
                 />
+
+                {errors.price && errors.price.type === "required" && <ErrMsg message="Price is required" />}
+                {errors.price && errors.price.type === "maxLength" && <ErrMsg message="Price can't be over 1 000 000" />}
+
                 <Input
                     type="number"
                     name="price"
                     placeholder="Price (only numbers)"
-                    reg={register}
+                    reg={register({
+                        required: true,
+                        maxLength: 5
+                    })}
                 />
+
+                {errors.description && errors.description.type === "required" && <ErrMsg message="Description is required" />}
+                {errors.description && errors.description.type === "minLength" && <ErrMsg message="Description must be at least 10 characters long" />}
+                {errors.description && errors.description.type === "maxLength" && <ErrMsg message="Description can't be over 550 symbols" />}
+
+
                 <TextArea
                     type="text"
                     name="description"
                     placeholder="Type your product description min 20 characters"
-                    reg={register}
+                    reg={register({
+                        required: true,
+                        minLength: 10,
+                        maxLength: 550
+                    })}
                 />
 
                 <Dropdown
@@ -50,7 +77,12 @@ const AddProduct = () => {
                 <Input
                     type="file"
                     name="image"
-                    reg={register}
+                    reg={register({
+                        required: true,
+                        validate: (value)=>{
+                            console.log(value[0].size)
+                        }
+                    })}
                 />
 
 

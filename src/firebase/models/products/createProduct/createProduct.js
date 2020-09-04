@@ -26,9 +26,6 @@ const createProduct = (data) => {
             console.log(resp)
         }).catch(e=>console.log(e))
     })
-
-
-
 }
 
 export default createProduct;

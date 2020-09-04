@@ -10,6 +10,7 @@ const Input = ({ name, reg, placeholder, type }) => {
                 placeholder={placeholder}
                 ref={reg}
                 className={style.inputSize}
+                
             />
         </div>
     )
