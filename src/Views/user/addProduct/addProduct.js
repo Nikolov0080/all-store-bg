@@ -4,14 +4,14 @@ import { Button } from 'react-bootstrap';
 import Input from '../../components/input/input';
 import TextArea from '../../components/textArea/textArea';
 import Dropdown from '../../components/dropdownSelect/dropdownSelect';
+import firebaseCreateProduct from '../../../firebase/models/products/createProduct/createProduct';
 
 const AddProduct = () => {
 
     const { handleSubmit, register } = useForm();
 
     const addProduct = (data) => {
-
-        console.log(data);
+        firebaseCreateProduct(data);
     }
 
     return (
@@ -43,9 +43,9 @@ const AddProduct = () => {
                 />
 
                 <Input
-                type="file"
-                name="image"
-                reg={register}
+                    type="file"
+                    name="image"
+                    reg={register}
                 />
 
 
