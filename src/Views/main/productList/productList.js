@@ -1,89 +1,99 @@
-import React,{useContext} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import firebase from 'firebase';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './productList.module.css';
-import test from './test.jpg';
+import loadingImg from './loadingImg.jpg';
 import Context from '../../../context/context';
-import getProducts from '../../../firebase/models/products/getProducts/getProducts';
-
-
 
 const ProductList = (props) => {
 
-    
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const context = useContext(Context);
-    console.log(context)
     const path = `/products/`;
-    
-    const allProducts = getProducts();
-    console.log(allProducts)
-    const products = [
-        {
-            image: test,
-            title: "Product Title",
-            description: 'hdask hjkfsdfsdfsdfsfsdfsdfsdfsdf dfsdfsdfhdkj ashd kj',
-            price: 40,
-            condition: "new",
-            createdAt: '12.06.2021',
-            creator: "Gencho"
-        },
-        {
-            image: test,
-            title: "Product Title",
-            description: 'h123 shdjashdkj ashd kj',
-            price: 10,
-            condition: "new",
-            createdAt: '12.06.2021',
-            creator: "Mincho"
-        },
-        {
-            image: test,
-            title: "Product Title",
-            description: 'h232 fds hjkashdjashdkj ashd kj',
-            price: 402,
-            condition: "new",
-            createdAt: '12.06.2021',
-            creator: "Goshko"
-        },
-        {
-            image: test,
-            title: "Product Title",
-            description: 'hdask hjkashdjashdkj ashd kj',
-            price: 650,
-            condition: "new",
-            createdAt: '12.06.2021',
-            creator: "Ivan"
-        }
-    ]
 
-    return (
-        <div>
-            Product list
-            <Row >
-                {products.map(({ image, title, price, description, creator }, index) => {
-                    return (
-                        <Col md key={index}>
-                            <Card className={style.size}>
-                                <Card.Img className={style} variant="top" src={image} />
-                                <Card.Body>
-                                    <Card.Title>{title}</Card.Title>
+    /// FIREBASE DATA FETCH...
+    const getImagePromise = (id) => {
+        return firebase.storage().ref('images/' + id).getDownloadURL().then((url) => {
+            return url
+        });
+    }
 
-                                    <Card.Footer className="text-center">
-                                        <Card.Text>Price: {price}   </Card.Text> 
-                                        <Card.Text>Posted by : [ {creator} ]</Card.Text>
-                                    </Card.Footer>
-                                    <Button variant="primary">
-                                        {/* use the product name or identifier to set path to details page */}
-                                        <Link to={path + creator.toLowerCase()}>View details</Link>
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    )
-                })}
-            </Row>
-        </div>
-    )
+    useEffect(() => {
+        firebase.database().ref('users/').once('value', async (snapshot) => {// get all users and userProducts in DB
+            await snapshot.forEach(item => {
+
+                const prods = Object.values(item.val())
+                prods.forEach((productData) => {
+
+                    getImagePromise(productData.imageId).then((imageResponse) => {
+
+                        setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
+                    })
+                })
+            })
+        }).then(() => {
+         
+                setLoading(false)
+       
+        })
+
+    }, [])
+
+    /// FIREBASE DATA FETCH...
+
+    if (loading) {
+        return (
+            <div>
+                <div>
+                    Product list
+                <Row >
+                        {products.map(({ imageUrl, title, price, description, creator }, index) => {
+                            return (
+                                <Col md key={index}>
+                                    <Card className={style.size}>
+                                     <Card.image />
+                                       
+                                    </Card>
+                                </Col>
+                            )
+                        })}
+                    </Row>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                Product list
+                <Row >
+                    {products.map(({ imageUrl, title, price, description, creator }, index) => {
+                        return (
+                            <Col md key={index}>
+                                <Card className={style.size}>
+                                    <Card.Img className={style.sizeImg} variant="top" src={imageUrl} />
+                                    <Card.Body>
+                                        <Card.Title>{title}</Card.Title>
+
+                                        <Card.Footer className="text-center">
+                                            <Card.Text>Price: {price}   </Card.Text>
+                                            <Card.Text>Posted by : [ {creator} ]</Card.Text>
+                                        </Card.Footer>
+                                        <Button variant="primary">
+                                            <Link to={path + creator.toLowerCase()}>View details</Link>
+                                        </Button>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        )
+                    })}
+                </Row>
+            </div>
+        )
+    }
+
+
 }
 
 export default ProductList;

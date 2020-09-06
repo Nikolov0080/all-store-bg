@@ -16,7 +16,8 @@ const AddProduct = () => {
     const addProduct = (data) => {
         firebaseCreateProduct({
             ...data,
-            userId: context.user.uid
+            userId: context.user.uid,
+            username:context.user.displayName
         });
     }
 
