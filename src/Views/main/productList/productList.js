@@ -1,16 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, {  useState, useEffect } from 'react';
 import firebase from 'firebase';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './productList.module.css';
-import loadingImg from './loadingImg.jpg';
-import Context from '../../../context/context';
 
 const ProductList = (props) => {
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const context = useContext(Context);
     const path = `/products/`;
 
     /// FIREBASE DATA FETCH...
@@ -70,6 +67,7 @@ const ProductList = (props) => {
                 <Row >
                     {products.map(({ imageUrl, title, price, description, creator }, index) => {
                         return (
+                            
                             <Col md key={index}>
                                 <Card className={style.size}>
                                     <Card.Img className={style.sizeImg} variant="top" src={imageUrl} />
@@ -80,7 +78,7 @@ const ProductList = (props) => {
                                             <Card.Text>Price: {price}   </Card.Text>
                                             <Card.Text>Posted by : [ {creator} ]</Card.Text>
                                         </Card.Footer>
-                                        <Button variant="primary">
+                                        <Button variant="success" style={{width:"100%"}}>
                                             <Link to={path + creator.toLowerCase()}>View details</Link>
                                         </Button>
                                     </Card.Body>

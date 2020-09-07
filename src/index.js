@@ -14,7 +14,6 @@ ReactDOM.render(
         <PageRouter />
       </SessionContext>
 
-
   </React.StrictMode>,
   document.getElementById('root')
 );

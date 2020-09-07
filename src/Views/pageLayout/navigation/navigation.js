@@ -16,6 +16,10 @@ const Navigation = () => {
             <Navbar expand="sm" sticky="top" className="nav justify-content-center text-center" variant="dark">
                 <Nav >
                     {links.map((link, index) => {
+                        if(link.name==='Profile'){
+                            return <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px",  }} 
+                            as={NavLink} key={index} to={link.link}>{link.name + " [ "+ context.user.displayName +" ] " } </Nav.Link>
+                        }
                         return <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px",  }} as={NavLink} key={index} to={link.link}>{link.name} </Nav.Link>
                     })}
                 </Nav>
