@@ -8,13 +8,27 @@
     height: 40em
 }
 
+.backBtn{
+    width:1.2em;
+    text-align: center;
+}
+
+.titleText{
+ font-size: xx-large;
+} 
+
 @media only screen and (max-width: 500px) {
+    
     .box {
        width:auto;
        margin-top: 20px;
       }
-.photo{
-    height: 20em;
-}
 
+    .photo{
+    height: 20em;
+      }
+
+   .titleText{
+    font-size: 24px;
+       }
     }
