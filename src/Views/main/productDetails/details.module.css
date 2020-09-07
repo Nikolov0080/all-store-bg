@@ -1,0 +1,20 @@
+.box{
+    width:90%;
+    margin: 0 auto;
+    margin-top:30px;
+}
+
+.photo{
+    height: 40em
+}
+
+@media only screen and (max-width: 500px) {
+    .box {
+       width:auto;
+       margin-top: 20px;
+      }
+.photo{
+    height: 20em;
+}
+
+    }
