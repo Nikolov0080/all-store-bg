@@ -22,7 +22,8 @@ const createProduct = (data) => {
         title,
         creator:username,
         createdAt: moment().format('L'),
-        imageId:currentId
+        imageId:currentId,
+        creatorId:userId
     }).then(() => {
         storageRef.child(currentId).put(image[0]).then((resp) => {
             console.log(resp)

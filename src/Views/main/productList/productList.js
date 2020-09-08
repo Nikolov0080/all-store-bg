@@ -48,6 +48,14 @@ const ProductList = (props) => {
 
     /// FIREBASE DATA FETCH...
 
+    if(products.length <1){
+        return(
+            <div className="text-center">
+                <h3>Nothing on sale right now</h3>
+            </div>
+        )
+    }
+
     if (loading) {
         return (
             <div>
