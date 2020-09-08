@@ -48,13 +48,6 @@ const ProductList = (props) => {
 
     /// FIREBASE DATA FETCH...
 
-    if(products.length <1){
-        return(
-            <div className="text-center">
-                <h3>Nothing on sale right now</h3>
-            </div>
-        )
-    }
 
     if (loading) {
         return (
@@ -67,10 +60,12 @@ const ProductList = (props) => {
     } else {
         return (
             <div>
+                    <Button style={{width:'100%'}} size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>  
+
                 <ErrorBoundary message='Server do not respond , please try again later'>
                     {error !== false ? new Error() : ''}
                     <Row >
-                        {products.map(({ imageUrl, title, price, description, creator,imageId }, index) => {
+                        {products.map(({ imageUrl, title, price, description, creator, imageId }, index) => {
                             return (
 
                                 <Col md key={index}>
@@ -85,7 +80,7 @@ const ProductList = (props) => {
                                             </Card.Footer>
                                             <Link to={{
                                                 pathname: path + creator.toLowerCase(),
-                                                state: { productId:imageId,imageUrl }
+                                                state: { productId: imageId, imageUrl }
                                             }}>
 
                                                 <Button variant="success" style={{ width: "100%" }}>Details</Button>

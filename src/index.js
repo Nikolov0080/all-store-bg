@@ -8,12 +8,12 @@ import './firebase/SDK';
 // bootstrap styles <!-- darkly, slate, cosmo, spacelab, and superhero -->
 ReactDOM.render(
 
-  <React.StrictMode>
+  // <React.StrictMode >
 
       <SessionContext>
         <PageRouter />
-      </SessionContext>
+      </SessionContext>,
 
-  </React.StrictMode>,
+//  </React.StrictMode>,
   document.getElementById('root')
 );

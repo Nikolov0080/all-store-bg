@@ -2,10 +2,7 @@
 export default (user) => {
     if (user === null) {
         return [
-            {
-                link: '/',
-                name: "All Store"
-            },
+           
             {
                 link: '/login',
                 name: "Login"
@@ -17,10 +14,7 @@ export default (user) => {
         ]
     } else {
         return [
-            {
-                link: '/',
-                name: "All Store"
-            },
+           
             {
                 link: '/profile',
                 name: "Profile"

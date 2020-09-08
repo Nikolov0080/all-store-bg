@@ -1,7 +1,7 @@
 import React from 'react'
 import Navigation from './navigation/navigation';
 import Footer from './footer/footer';
-import { Container } from 'react-bootstrap'
+import { Container } from 'react-bootstrap';
 
 const PageLayout = (props) => {
     return (
