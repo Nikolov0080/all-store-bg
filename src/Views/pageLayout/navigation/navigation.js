@@ -8,14 +8,12 @@ import '../../../firebase/SDK';
 const Navigation = () => {
 
     const context = useContext(Context);
-
     const links = navLinks(context.user);
     const linkRef = useRef(links);
 
     return (
 
-        <React.Fragment >
-
+     <div>
             <Navbar expand="lg" sticky="top" variant="dark">
                 <Navbar.Brand >
                 <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px", }} as={NavLink}to='/'>ALL STORE</Nav.Link>
@@ -39,11 +37,9 @@ const Navigation = () => {
                             )
                     })}
 
-
                 </Navbar.Collapse>
-
             </Navbar>
-        </React.Fragment>
+            </div>
     )
 }
 

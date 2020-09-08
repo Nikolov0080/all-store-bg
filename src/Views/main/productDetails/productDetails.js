@@ -10,7 +10,7 @@ const ProductDetails = (props) => {
     const productId = props.location.state.productId;
     const [currentProduct, setCurrentProduct] = useState(null);
     const [buy, setBuy] = useState(false);
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         firebase.database().ref('users/').once('value', (snapshot) => {

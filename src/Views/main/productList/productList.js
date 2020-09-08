@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
-import { Card, Button, Row, Col } from 'react-bootstrap';
+import { Card, Button, Row, Col, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './productList.module.css';
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
@@ -37,7 +37,7 @@ const ProductList = (props) => {
                     })
                 })
             }).then(() => {
-                setLoading(false)
+                setTimeout((setLoading(false)), 2000)
             })
         } catch (error) {
             setError(error)
@@ -48,19 +48,22 @@ const ProductList = (props) => {
 
     /// FIREBASE DATA FETCH...
 
-
     if (loading) {
         return (
             <div>
                 <div className="text-center">
-                    <h1>Loading...</h1>
+                    <h1>Loading...
+                    <Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>
+                    </h1>
                 </div>
             </div>
         )
     } else {
         return (
             <div>
-                    <Button style={{width:'100%'}} size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>  
+                <Button style={{ width: '100%',marginBottom:'1em' }} size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>
 
                 <ErrorBoundary message='Server do not respond , please try again later'>
                     {error !== false ? new Error() : ''}
@@ -97,8 +100,6 @@ const ProductList = (props) => {
             </div>
         )
     }
-
-
 }
 
 export default ProductList;
