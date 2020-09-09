@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import firebase from 'firebase';
 import { Card, Button, Row, Col, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './productList.module.css';
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
+import getProducts from '../../../firebase/models/products/getProducts/getProducts';
 
 const ProductList = (props) => {
 
@@ -13,40 +13,16 @@ const ProductList = (props) => {
 
     const path = `/products/`;
 
-    /// FIREBASE DATA FETCH...
-
-    const getImagePromise = (id) => {
-        return firebase.storage().ref('images/' + id).getDownloadURL().then((url) => {
-            return url
-        });
-    }
-
     useEffect(() => {
         try {
-
-            firebase.database().ref('users').once('value', async (snapshot) => {// get all users and userProducts in DB
-                await snapshot.forEach(item => {
-
-                    const prods = Object.values(item.val())
-                    prods.forEach((productData) => {
-
-                        getImagePromise(productData.imageId).then((imageResponse) => {
-
-                            setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
-                        })
-                    })
-                })
-            }).then(() => {
+            getProducts(setProducts).then(() => {
                 setTimeout((setLoading(false)), 2000)
             })
         } catch (error) {
             setError(error)
         }
-
-
     }, [error])
 
-    /// FIREBASE DATA FETCH...
 
     if (loading) {
         return (
@@ -63,7 +39,7 @@ const ProductList = (props) => {
     } else {
         return (
             <div>
-                <Button style={{ width: '100%',marginBottom:'1em' }} size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>
+                <Button style={{ width: '100%', marginBottom: '1em' }} size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>
 
                 <ErrorBoundary message='Server do not respond , please try again later'>
                     {error !== false ? new Error() : ''}

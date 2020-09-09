@@ -8,9 +8,9 @@ const Profile = () => {
         <div>
             Profile
             <Card>
-                    {/* implement sell form and page */}
                     <Button size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>  
             </Card>
+
 
             
             <Button onClick={signOut}>sign out</Button>

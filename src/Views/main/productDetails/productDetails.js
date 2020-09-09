@@ -44,9 +44,7 @@ const ProductDetails = (props) => {
             </Link>
             <Card className={style.box} >
                 <Card.Header>
-
                     <h4 className={style.titleText}>{currentProduct.title} </h4>
-
                 </Card.Header>
                 <Card.Img className={style.photo} src={props.location.state.imageUrl} />
                 <div className="text-center">
