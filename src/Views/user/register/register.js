@@ -5,20 +5,29 @@ import Input from '../../components/input/input';
 import firebaseRegister from '../../../firebase/models/user/register/register';
 import ErrMsg from './errMsg';
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
 
     const { handleSubmit, register, watch, errors } = useForm();
     const [err, setErr] = useState(false);
+    const history = useHistory();
 
     const submitForm = ({ username, email, password }) => {
 
         try {
-            firebaseRegister(email*2, password, username)
+            firebaseRegister(email, password, username).then((response) => {
+                console.log(response)
+                history.push({
+                    pathname: '/',
+                });
+                window.location.reload(false);
+            })
         } catch (error) {
             setErr(error);
         }
     }
+
 
     return (
         <div className="text-center">

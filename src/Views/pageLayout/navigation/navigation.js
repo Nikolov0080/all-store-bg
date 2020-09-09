@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState, useEffect } from 'react'
 import { Navbar, Nav } from 'react-bootstrap';
 import navLinks from './navLinks';
 import { NavLink } from 'react-router-dom';
@@ -8,38 +8,37 @@ import '../../../firebase/SDK';
 const Navigation = () => {
 
     const context = useContext(Context);
-    const links = navLinks(context.user);
-    const linkRef = useRef(links);
+    const links = navLinks(context.user)
 
     return (
 
-     <div>
+        <div>
             <Navbar expand="lg" sticky="top" variant="dark">
                 <Navbar.Brand >
-                <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px", }} as={NavLink}to='/'>ALL STORE</Nav.Link>
+                    <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px", }} as={NavLink} to='/'>ALL STORE</Nav.Link>
 
                 </Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
 
-                    {linkRef.current.map((link, index) => {
-                        
+                    {links.map((link, index) => {
+
                         if (link.name === 'Profile') {
-                            return (
+                                return (
                                 <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px", }}
                                     as={NavLink} key={index} to={link.link}>{link.name + " [ " + context.user.displayName + " ] "} </Nav.Link>
                             )
                         }
-                        
+
                         return (
                             <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px", }} as={NavLink} key={index} to={link.link}>{link.name} </Nav.Link>
-                            )
+                        )
                     })}
 
                 </Navbar.Collapse>
             </Navbar>
-            </div>
+        </div>
     )
 }
 

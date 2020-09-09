@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-const reg = (email, password,username) => {
+const reg = (email, password, username) => {
 
     return firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
 
@@ -8,13 +8,13 @@ const reg = (email, password,username) => {
         console.log(errorCode);
         return false;
     }).then((result) => {
-        return result.user.updateProfile({
+        result.user.updateProfile({
             displayName: username
         })
-
+        return result
     }).catch((error) => {
         console.log(error);
-    }); 
+    });
 }
 
 export default reg;

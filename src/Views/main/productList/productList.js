@@ -16,7 +16,7 @@ const ProductList = (props) => {
     useEffect(() => {
         try {
             getProducts(setProducts).then(() => {
-                setTimeout((setLoading(false)), 2000)
+             setLoading(false)
             })
         } catch (error) {
             setError(error)
