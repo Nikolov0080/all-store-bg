@@ -1,0 +1,10 @@
+.sizeImg{
+    width: 20em;
+}
+
+@media only screen and (max-width: 500px) {
+    .sizeImg {
+       width:100%;
+       height: 17em;
+      }
+    }

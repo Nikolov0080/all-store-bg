@@ -8,7 +8,7 @@ import style from './profile.module.css';
 
 const Profile = () => {
     const context = useContext(Context)
-    const [products, setProducts] = useState('');
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -17,6 +17,7 @@ const Profile = () => {
     }, [])
 
     if (!!products !== true) {
+        
         return (
             <div>
                 <div className="text-center">
@@ -28,8 +29,19 @@ const Profile = () => {
                 </div>
             </div>
         )
-    }
-    console.log(products)
+    }else if(products.length ===0){
+        return (
+            <Card>
+            <Button size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>
+          
+          <Card.Footer>you have no products selling right now</Card.Footer> 
+          <Button onClick={signOut}>sign out</Button>
+
+        </Card>
+            )
+        }
+
+
     return (
         <div>
             <Card>
@@ -48,7 +60,6 @@ const Profile = () => {
 
                                         <Card.Footer className="text-center">
                                             <Card.Text>Price: {price}   </Card.Text>
-                                            <Card.Text>Posted by : [ {creator} ]</Card.Text>
                                         </Card.Footer>
 
                                     </Card.Body>
@@ -57,8 +68,8 @@ const Profile = () => {
                         )
                     })}
                 </Col>
-            </div>
             <Button onClick={signOut}>sign out</Button>
+            </div>
         </div>
     )
 }
