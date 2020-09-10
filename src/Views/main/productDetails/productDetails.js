@@ -37,12 +37,13 @@ const ProductDetails = (props) => {
 
     return (
         <div>
-            <Link to="/products">
-                <Button variant="danger">
+           
+            <Card className={style.box} >
+                 <Link to="/products">
+                <Button style={{width:"100%"}} variant="danger">
                     <h2 className={style.backBtn}> {"<"} </h2>
                 </Button>
             </Link>
-            <Card className={style.box} >
                 <Card.Header>
                     <h4 className={style.titleText}>{currentProduct.title} </h4>
                 </Card.Header>
