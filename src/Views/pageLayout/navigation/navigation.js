@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Navbar, Nav } from 'react-bootstrap';
 import navLinks from './navLinks';
 import { NavLink } from 'react-router-dom';

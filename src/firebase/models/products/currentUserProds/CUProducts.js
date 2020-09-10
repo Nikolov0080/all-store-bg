@@ -1,10 +1,6 @@
 import firebase from 'firebase';
 
-const getImagePromise = (id) => {
-    return firebase.storage().ref('images/' + id).getDownloadURL().then((url) => {
-        return url
-    });
-}
+import getImage from '../getImage/getImage';
 
 const currentUserProducts = (setProducts, ID) => {
     return firebase.database().ref('users').on('value', (snap) => {
@@ -14,7 +10,7 @@ const currentUserProducts = (setProducts, ID) => {
                 const prods = Object.values(data.val())
                 prods.forEach((productData) => {
 
-                    getImagePromise(productData.imageId).then((imageResponse) => {
+                    getImage(productData.imageId).then((imageResponse) => {
 
                       return  setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
                     })

@@ -7,7 +7,6 @@ const ID = () => {
 
 const dbRef = firebase.database().ref('users');
 
-const storageRef = firebase.storage().ref('images')
 const createProduct = (data) => {
 
     const currentId = ID();
@@ -20,16 +19,19 @@ const createProduct = (data) => {
         description,
         price,
         title,
-        creator:username,
+        creator: username,
         createdAt: moment().format('L'),
-        imageId:currentId,
-        creatorId:userId
+        imageId: currentId,
+        creatorId: userId
     }).then(() => {
-        storageRef.child(currentId).put(image[0]).then((resp) => {
-            console.log(resp)
-        }).then((resp) => {
-            console.log(resp)
-        }).catch(e => console.log(e))
+
+        const storageRef = firebase.storage().ref('images/' + currentId)
+
+
+
+        storageRef.put(image[0]).then((response) => {
+            console.log(response)
+        }).catch(e=>console.log(e))
     })
 }
 
