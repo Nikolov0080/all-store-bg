@@ -5,7 +5,8 @@
 }
 
 .photo{
-    height: 40em
+    height: 40em;
+    margin-bottom:8em;
 }
 
 .backBtn{
@@ -26,6 +27,7 @@
 
     .photo{
     height: 20em;
+   margin-bottom:3em;
       }
 
    .titleText{
