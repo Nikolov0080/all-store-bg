@@ -52,7 +52,7 @@ const Profile = () => {
                                                 <Card.Title>{title}</Card.Title>
 
                                                 <Card.Footer className="text-center">
-                                                    <Card.Text>Price: {price}   </Card.Text>
+                                                    <Card.Header style={{color:'green'}}><h4>{price}.00 USD</h4></Card.Header>
                                                 </Card.Footer>
 
                                             </Card.Body>

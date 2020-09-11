@@ -19,7 +19,7 @@ const ProductsTable = ({date,condition,creator,price}) => {
                     </tr>
                     <tr>
                         <td>Price</td>
-                        <td>{price} USD</td>
+                        <td style={{color:"green"}}>{price}.00 USD</td>
                     </tr>
                 </tbody>
             </Table>

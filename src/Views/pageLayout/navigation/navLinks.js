@@ -22,6 +22,10 @@ export default (user) => {
             {
                 link: '/products',
                 name: "Products"
+            },
+            {
+                link:'/my-orders',
+                name:'My Orders'
             }
         ]
     }

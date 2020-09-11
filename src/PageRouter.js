@@ -10,6 +10,7 @@ import ProductDetails from './Views/main/productDetails/productDetails';
 import AddProduct from './Views/user/addProduct/addProduct';
 import ProtectedRoute from './protectedRoutes/user';
 import ProtectedRouteGuest from './protectedRoutes/guest';
+import MyOrders from './Views/user/myOrders/myOrders';
 
 const PageRouter = () => {
     return (
@@ -24,6 +25,8 @@ const PageRouter = () => {
                         <ProtectedRouteGuest exact path="/products" component={Products} />
                         <ProtectedRouteGuest exact path="/products/:product" component={ProductDetails} />
                         <ProtectedRouteGuest exact path="/add-product" component={AddProduct} />
+                        <ProtectedRouteGuest exact path="/my-orders" component={MyOrders} />
+
 
                         {/* ADD PRODUCT DETAILS LATER ON ! */}
                     </Switch>

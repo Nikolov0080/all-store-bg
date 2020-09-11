@@ -54,7 +54,7 @@ const ProductList = (props) => {
                                             <Card.Title>{title}</Card.Title>
 
                                             <Card.Footer className="text-center">
-                                                <Card.Header>Price: {price} </Card.Header>
+                                                <Card.Header><h4 style={{color:"green"}}>{price}.00 USD</h4> </Card.Header>
                                                 <Card.Text>Posted by : [ {creator} ]</Card.Text>
                                             </Card.Footer>
                                             <Link to={{
