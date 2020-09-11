@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Button, Card, Row, Col, Container } from 'react-bootstrap';
+import { Button, Card, Row, Col, Container, Table } from 'react-bootstrap';
 import signOut from '../../../firebase/models/user/signOut/signOut';
 import { Link } from 'react-router-dom';
 import CUProducts from '../../../firebase/models/products/currentUserProds/CUProducts';
@@ -36,38 +36,38 @@ const Profile = () => {
 
     if (products !== '') {
 
-
-
         return (
             <div>
                 <Card>
                     <Button size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>
                 </Card>
                 <div>
-                    <Container>
                         <Row >
                             {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
                                 return (
                                     <Col sm key={index}>
-                                   
-                                        <Card className={style.size}>
+
+                                        <Card bg="info" className={style.size}>
                                             <Card.Img className={style.sizeImg} variant="top" src={imageUrl} />
                                             <Card.Body>
                                                 <Card.Title>{title}</Card.Title>
 
-                                                <Card.Footer className="text-center">
-                                                    <Card.Header style={{ color: 'green' }}><h4>{price}.00 USD</h4></Card.Header>
+                                                    <h4>{price}.00 USD</h4>
+
+                                                    {/* ///////////////// */}
                                                     <Link to={{
                                                         pathname: path + creator.toLowerCase(),
-                                                        state: { productId: imageId, imageUrl,
-                                                        isCreator: !!(creatorId === context.user.uid)
+                                                        state: {
+                                                            productId: imageId, imageUrl,
+                                                            isCreator: !!(creatorId === context.user.uid)
                                                         }
                                                     }}>
-
                                                         <Button variant="success" style={{ width: "50%" }}>Details</Button>
-
                                                     </Link>
-                                                </Card.Footer>
+                                                    {/* ///////////////// */}
+
+                                                    <Button variant="danger" style={{ width: "50%" }}>Delete</Button>
+                                                    {/* TODO */}
 
                                             </Card.Body>
                                         </Card>
@@ -75,7 +75,9 @@ const Profile = () => {
                                 )
                             })}
                         </Row>
-                    </Container>
+
+
+
                     <Button onClick={signOut}>sign out</Button>
                 </div>
             </div>

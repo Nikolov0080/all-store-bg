@@ -15,8 +15,6 @@ const createProduct = (data) => {
     const { condition, description, price, title, userId, username } = data;
     const { image } = data
 
-    console.log()
-
     dbRef.child(userId).child(currentId).set({
         condition,
         description,
@@ -31,8 +29,6 @@ const createProduct = (data) => {
         const storageRef = firebase.storage().ref('images/' + currentId)
 
         compressor(image).then((img) => {
-
-
             storageRef.put(img).then((response) => {
                 console.log(response)
             }).catch(e => console.log(e))

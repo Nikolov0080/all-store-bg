@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useContext} from 'react';
 import { Card, Button, Row, Col, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './productList.module.css';
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
 import getProducts from '../../../firebase/models/products/getProducts/getProducts';
+import Context from '../../../context/context';
 
 const ProductList = (props) => {
 
+    const context = useContext(Context)
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -44,7 +46,7 @@ const ProductList = (props) => {
                 <ErrorBoundary message='Server do not respond , please try again later'>
                     {error !== false ? new Error() : ''}
                     <Row >
-                        {products.map(({ imageUrl, title, price, description, creator, imageId }, index) => {
+                        {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
                             return (
 
                                 <Col md key={index}>
@@ -59,7 +61,9 @@ const ProductList = (props) => {
                                             </Card.Footer>
                                             <Link to={{
                                                 pathname: path + creator.toLowerCase(),
-                                                state: { productId: imageId, imageUrl }
+                                                state: { productId: imageId, imageUrl,
+                                                isCreator:!!(creatorId === context.user.uid)
+                                                }
                                             }}>
 
                                                 <Button variant="success" style={{ width: "100%" }}>Details</Button>

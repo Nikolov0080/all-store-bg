@@ -4,8 +4,12 @@ import { Card, Button } from 'react-bootstrap';
 import style from './details.module.css';
 import BuyForm from '../../components/buyForm/buyForm';
 import ProductsTable from './productTable';
+import deleteProduct from '../../../firebase/models/products/deleteProduct/deleteProduct';
+import {useHistory} from 'react-router-dom';
+
 const ProductDetails = (props) => {
 
+    const history = useHistory();
     const productId = props.location.state.productId;
     const isCreator = props.location.state.isCreator;
     const [currentProduct, setCurrentProduct] = useState(null);
@@ -28,17 +32,21 @@ const ProductDetails = (props) => {
         })
     }, [productId]);
 
+    const deleteOne = () => {
+        deleteProduct(currentProduct.creatorId, currentProduct.imageId).then(()=>{
+            history.goBack();
+        })
+    }
+
     if (currentProduct === null) {
         return (
             <h1>Loading...</h1>
         )
     }
 
-
     return (
 
         <div>
-
             <Card className={style.box} >
                 <Button onClick={() => props.history.goBack()} style={{ width: "100%" }} variant="danger">
                     <h2 className={style.backBtn}> {"<"} </h2>
@@ -58,11 +66,10 @@ const ProductDetails = (props) => {
                 </div>
 
                 {isCreator === true
-                    ? <Button variant="danger" > Delete</Button> // TODO complete delete functionality
+                    ? <Button variant="danger" onClick={deleteOne}> Delete</Button> // TODO complete delete functionality
                     : <Button variant="success" onClick={() => setBuy(true)}>Buy</Button>
                 }
             </Card>
-
             {buy !== false ? <BuyForm /> : ''}
         </div>
     )
