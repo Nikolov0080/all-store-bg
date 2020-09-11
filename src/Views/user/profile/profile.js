@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Button, Card, Row, Col, Container, Table } from 'react-bootstrap';
+import { Button, Card, Row, Col } from 'react-bootstrap';
 import signOut from '../../../firebase/models/user/signOut/signOut';
 import { Link } from 'react-router-dom';
 import CUProducts from '../../../firebase/models/products/currentUserProds/CUProducts';
@@ -8,6 +8,7 @@ import style from './profile.module.css';
 import Loading from '../../components/loading/loading';
 
 const Profile = () => {
+
     const context = useContext(Context)
     const [products, setProducts] = useState('');
     const [loading, setLoading] = useState(true);
@@ -75,9 +76,6 @@ const Profile = () => {
                                 )
                             })}
                         </Row>
-
-
-
                     <Button onClick={signOut}>sign out</Button>
                 </div>
             </div>
