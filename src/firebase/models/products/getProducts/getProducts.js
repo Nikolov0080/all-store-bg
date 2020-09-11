@@ -10,15 +10,15 @@ const getProducts = ( setProducts) => {
 
 
 
-   return firebase.database().ref('users').once('value', async (snapshot) => {// get all users and userProducts in DB
-        await snapshot.forEach(item => {
+   return firebase.database().ref('users').once('value',  (snapshot) => {// get all users and userProducts in DB
+         snapshot.forEach(item => {
 
             const prods = Object.values(item.val())
             prods.forEach((productData) => {
 
                 getImagePromise(productData.imageId).then((imageResponse) => {
 
-                    setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
+                 return   setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
                 })
             })
         })

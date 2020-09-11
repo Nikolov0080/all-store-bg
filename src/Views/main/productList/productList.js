@@ -16,13 +16,13 @@ const ProductList = (props) => {
     useEffect(() => {
         try {
             getProducts(setProducts).then(() => {
-             setLoading(false)
+                setLoading(false)
             })
+
         } catch (error) {
             setError(error)
         }
-    }, [error])
-
+    }, [])
 
     if (loading) {
         return (
@@ -54,7 +54,7 @@ const ProductList = (props) => {
                                             <Card.Title>{title}</Card.Title>
 
                                             <Card.Footer className="text-center">
-                                                <Card.Text>Price: {price}   </Card.Text>
+                                                <Card.Header>Price: {price} </Card.Header>
                                                 <Card.Text>Posted by : [ {creator} ]</Card.Text>
                                             </Card.Footer>
                                             <Link to={{
