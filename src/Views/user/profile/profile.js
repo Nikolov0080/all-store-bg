@@ -12,6 +12,8 @@ const Profile = () => {
     const [products, setProducts] = useState('');
     const [loading, setLoading] = useState(true);
 
+    const path = `/products/`;
+
     useEffect(() => {
         CUProducts(setProducts, context.user.uid);
     }, [context])
@@ -33,7 +35,9 @@ const Profile = () => {
     }
 
     if (products !== '') {
-        console.log(products)
+
+
+
         return (
             <div>
                 <Card>
@@ -42,17 +46,27 @@ const Profile = () => {
                 <div>
                     <Container>
                         <Row >
-                            {products.map(({ imageUrl, title, price, description, creator, imageId }, index) => {
+                            {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
                                 return (
-
                                     <Col sm key={index}>
+                                   
                                         <Card className={style.size}>
                                             <Card.Img className={style.sizeImg} variant="top" src={imageUrl} />
                                             <Card.Body>
                                                 <Card.Title>{title}</Card.Title>
 
                                                 <Card.Footer className="text-center">
-                                                    <Card.Header style={{color:'green'}}><h4>{price}.00 USD</h4></Card.Header>
+                                                    <Card.Header style={{ color: 'green' }}><h4>{price}.00 USD</h4></Card.Header>
+                                                    <Link to={{
+                                                        pathname: path + creator.toLowerCase(),
+                                                        state: { productId: imageId, imageUrl,
+                                                        isCreator: !!(creatorId === context.user.uid)
+                                                        }
+                                                    }}>
+
+                                                        <Button variant="success" style={{ width: "50%" }}>Details</Button>
+
+                                                    </Link>
                                                 </Card.Footer>
 
                                             </Card.Body>

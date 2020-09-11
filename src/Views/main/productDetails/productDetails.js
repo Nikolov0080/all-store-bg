@@ -3,14 +3,14 @@ import firebase from 'firebase';
 import { Card, Button } from 'react-bootstrap';
 import style from './details.module.css';
 import BuyForm from '../../components/buyForm/buyForm';
-import { Link } from 'react-router-dom'
 import ProductsTable from './productTable';
 const ProductDetails = (props) => {
 
     const productId = props.location.state.productId;
+    const isCreator = props.location.state.isCreator;
     const [currentProduct, setCurrentProduct] = useState(null);
     const [buy, setBuy] = useState(false);
-    
+
     useEffect(() => {
 
         firebase.database().ref('users/').once('value', (snapshot) => {
@@ -34,30 +34,33 @@ const ProductDetails = (props) => {
         )
     }
 
-    console.log(currentProduct)
+
     return (
+
         <div>
-           
+
             <Card className={style.box} >
-                 <Link to="/products">
-                <Button style={{width:"100%"}} variant="danger">
+                <Button onClick={() => props.history.goBack()} style={{ width: "100%" }} variant="danger">
                     <h2 className={style.backBtn}> {"<"} </h2>
                 </Button>
-            </Link>
-              
-                <Card.Img className={style.photo} src={props.location.state.imageUrl} /> 
-                 <Card.Header className="text-center">
+
+                <Card.Img className={style.photo} src={props.location.state.imageUrl} />
+                <Card.Header className="text-center">
                     <h4 className={style.titleText}>{currentProduct.title} </h4>
                 </Card.Header>
                 <div className="text-center">
-                   <ProductsTable
-                    date={currentProduct.createdAt}
-                   condition={currentProduct.condition}
-                   creator={currentProduct.creator}
-                   price={currentProduct.price}
-                   />
+                    <ProductsTable
+                        date={currentProduct.createdAt}
+                        condition={currentProduct.condition}
+                        creator={currentProduct.creator}
+                        price={currentProduct.price}
+                    />
                 </div>
-                <Button variant="success" onClick={() => setBuy(true)}>Buy</Button>
+
+                {isCreator === true
+                    ? <Button variant="danger" > Delete</Button> // TODO complete delete functionality
+                    : <Button variant="success" onClick={() => setBuy(true)}>Buy</Button>
+                }
             </Card>
 
             {buy !== false ? <BuyForm /> : ''}
