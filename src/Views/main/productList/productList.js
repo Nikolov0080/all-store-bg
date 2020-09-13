@@ -41,7 +41,10 @@ const ProductList = (props) => {
     } else {
         return (
             <div>
-                <Button style={{ width: '100%', marginBottom: '1em' }} size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>
+                
+                <Button variant="outline-success" size="lg" className="mt-1"  style={{ width: '100%', marginBottom: '1em' }}>
+                    <Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link>
+                    </Button>
 
                 <ErrorBoundary message='Server do not respond , please try again later'>
                     {error !== false ? new Error() : ''}

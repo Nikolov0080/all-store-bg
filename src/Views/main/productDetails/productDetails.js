@@ -48,8 +48,8 @@ const ProductDetails = (props) => {
 
         <div>
             <Card className={style.box} >
-                <Button onClick={() => props.history.goBack()} style={{ width: "100%" }} variant="danger">
-                    <h2 className={style.backBtn}> {"<"} </h2>
+                <Button onClick={() => props.history.goBack()} style={{ width: "100%" }} variant="outline-success">
+                    <h2 className={style.backBtn}> {"< Back"} </h2>
                 </Button>
 
                 <Card.Img className={style.photo} src={props.location.state.imageUrl} />

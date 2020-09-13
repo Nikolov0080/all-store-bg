@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Button, Card, Row, Col } from 'react-bootstrap';
+import { Button, Card, Row, Col, Alert } from 'react-bootstrap';
 import signOut from '../../../firebase/models/user/signOut/signOut';
 import { Link } from 'react-router-dom';
 import CUProducts from '../../../firebase/models/products/currentUserProds/CUProducts';
 import Context from '../../../context/context';
 import style from './profile.module.css';
 import Loading from '../../components/loading/loading';
+import BtnGroup from '../../components/buttonGroup/btnGroup';
+import deleteProduct from '../../../firebase/models/products/deleteProduct/deleteProduct';
 
 const Profile = () => {
 
@@ -15,17 +17,22 @@ const Profile = () => {
 
     const path = `/products/`;
 
+    const deleteOne = (id)=>{
+        deleteProduct(context.user.uid,id)
+        console.log("deleted!")
+    }
+
     useEffect(() => {
         CUProducts(setProducts, context.user.uid);
-    }, [context])
+    }, [context]);
 
     useEffect(() => {
         if (products.length !== 0) {
-            setLoading(false);
+            setTimeout(()=>{
+                setLoading(false);
+            },450)
         } else {
-            setTimeout(() => {
-                setLoading(false)
-            }, 300)
+            setLoading(false)
         }
     }, [products]);
 
@@ -34,48 +41,48 @@ const Profile = () => {
             <Loading />
         )
     }
+    // TODO fix loading
 
     if (products !== '') {
 
         return (
             <div>
-                <Card>
-                    <Button size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>
-                </Card>
+                <BtnGroup />
                 <div>
-                        <Row >
-                            {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
-                                return (
-                                    <Col sm key={index}>
+                    <Alert className="text-center" variant="primary"><h1>Items you sell</h1></Alert>
+                    <Row >
+                        {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
+                            return (
+                                <Col sm key={index}>
 
-                                        <Card bg="info" className={style.size}>
-                                            <Card.Img className={style.sizeImg} variant="top" src={imageUrl} />
-                                            <Card.Body>
-                                                <Card.Title>{title}</Card.Title>
+                                    <Card className={style.size}>
+                                        <Card.Img className={style.sizeImg} variant="top" src={imageUrl} />
+                                        <Card.Body>
+                                            <Card.Title>{title}</Card.Title>
 
-                                                    <h4>{price}.00 USD</h4>
+                                            <h4>{price}.00 USD</h4>
 
-                                                    {/* ///////////////// */}
-                                                    <Link to={{
-                                                        pathname: path + creator.toLowerCase(),
-                                                        state: {
-                                                            productId: imageId, imageUrl,
-                                                            isCreator: !!(creatorId === context.user.uid)
-                                                        }
-                                                    }}>
-                                                        <Button variant="success" style={{ width: "50%" }}>Details</Button>
-                                                    </Link>
-                                                    {/* ///////////////// */}
+                                            {/* ///////////////// */}
+                                            <Link to={{
+                                                pathname: path + creator.toLowerCase(),
+                                                state: {
+                                                    productId: imageId, imageUrl,
+                                                    isCreator: !!(creatorId === context.user.uid)
+                                                }
+                                            }}>
+                                                <Button variant="success" style={{ width: "50%" }}>Details</Button>
+                                            </Link>
+                                            {/* ///////////////// */}
 
-                                                    <Button variant="danger" style={{ width: "50%" }}>Delete</Button>
-                                                    {/* TODO */}
+                                            <Button variant="danger" onClick={()=>deleteOne(imageId)} style={{ width: "50%" }}>Delete</Button>
+                                            {/* TODO */}
 
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                )
-                            })}
-                        </Row>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            )
+                        })}
+                    </Row>
                     <Button onClick={signOut}>sign out</Button>
                 </div>
             </div>
@@ -84,14 +91,9 @@ const Profile = () => {
 
     return (
         <div>
-            <Card>
-                <Button size="lg"><Link to={'/add-product'}>Sell on All-store <h1>+</h1></Link></Button>
-            </Card>
-            <Card className="text-center">
-                <Card.Text>No items selling</Card.Text>
-            </Card>
+            <BtnGroup />
+            <Alert className="text-center" variant="primary"><h1>No items to show</h1></Alert>
         </div>
-
     )
 }
 

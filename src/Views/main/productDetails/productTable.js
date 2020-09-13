@@ -3,7 +3,7 @@ import {Table} from 'react-bootstrap';
 const ProductsTable = ({date,condition,creator,price}) => {
     return (
         <div>
-            <Table striped bordered hover variant="dark">
+            <Table  bordered hover>
                 <tbody>
                     <tr>
                         <td>Date posted</td>

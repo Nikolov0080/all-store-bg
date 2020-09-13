@@ -11,6 +11,7 @@ const deleteProduct = (userId, id) => {
             console.log(err);
         }).then((result)=>{
             console.log(result)
+            return
         })
     })
 }

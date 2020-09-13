@@ -13,7 +13,7 @@ const Navigation = () => {
     return (
 
         <div>
-            <Navbar expand="lg" sticky="top" variant="dark">
+            <Navbar expand="lg" sticky="top" >
                 <Navbar.Brand >
                     <Nav.Link style={{ fontSize: "20px", paddingLeft: '20px', paddingRight: "20px", }} as={NavLink} to='/'>ALL STORE</Nav.Link>
 
