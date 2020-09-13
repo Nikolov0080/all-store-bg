@@ -19,9 +19,7 @@ const ProductDetails = (props) => {
 
         firebase.database().ref('users/').once('value', (snapshot) => {
 
-            const products = Object.values(snapshot.val())
-
-            const allProds = products.reduce((acc, cVal) => {
+            const allProds = Object.values(snapshot.val()).reduce((acc, cVal) => {
 
                 Object.assign(acc, cVal)
 

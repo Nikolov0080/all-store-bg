@@ -17,26 +17,23 @@ const Profile = () => {
 
     const path = `/products/`;
 
-    const deleteOne = (id)=>{
-        deleteProduct(context.user.uid,id)
+    const deleteOne = (id) => {
+        deleteProduct(context.user.uid, id)
         console.log("deleted!")
     }
 
     useEffect(() => {
-        CUProducts(setProducts, context.user.uid);
+
+        CUProducts(setProducts, context.user.uid).then((response) => {
+            if (response) {
+                setTimeout(() => {
+                    setLoading(false)
+                }, 550)
+            }
+        });
     }, [context]);
 
-    useEffect(() => {
-        if (products.length !== 0) {
-            setTimeout(()=>{
-                setLoading(false);
-            },450)
-        } else {
-            setLoading(false)
-        }
-    }, [products]);
-
-    if (loading) {
+    if (loading && products === '') {
         return (
             <Loading />
         )
@@ -47,11 +44,14 @@ const Profile = () => {
 
         return (
             <div>
+
                 <BtnGroup />
+
                 <div>
                     <Alert className="text-center" variant="primary"><h1>Items you sell</h1></Alert>
                     <Row >
                         {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
+
                             return (
                                 <Col sm key={index}>
 
@@ -74,7 +74,7 @@ const Profile = () => {
                                             </Link>
                                             {/* ///////////////// */}
 
-                                            <Button variant="danger" onClick={()=>deleteOne(imageId)} style={{ width: "50%" }}>Delete</Button>
+                                            <Button variant="danger" onClick={() => deleteOne(imageId)} style={{ width: "50%" }}>Delete</Button>
                                             {/* TODO */}
 
                                         </Card.Body>

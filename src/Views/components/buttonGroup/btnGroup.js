@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const BtnGroup = (props) => {
     return (
         <div>
-            <DropdownButton size="lg" as={ButtonGroup} title="Dropdown" id="bg-nested-dropdown">
+            <DropdownButton size="lg" as={ButtonGroup} title="Orders-actions" id="bg-nested-dropdown">
                 <Dropdown.Item as="div" eventKey="1">
                 <Link  to={'/add-product'}> <Button variant="outline-primary" size="lg" >Sell on All-store </Button></Link>
                 </Dropdown.Item>
