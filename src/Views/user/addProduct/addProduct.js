@@ -20,6 +20,10 @@ const AddProduct = () => {
             ...data,
             userId: context.user.uid,
             username: context.user.displayName
+        }).then((resp)=>{
+           if(resp){
+               history.push('/profile')
+           }
         })
     }
 
