@@ -38,8 +38,6 @@ const Profile = () => {
                 }, 550)
             }
         });
-
-
     }, [context]);
 
     if (loading && products === '') {
@@ -52,10 +50,8 @@ const Profile = () => {
 
         return (
             <div>
-                
 
                 <BtnGroup foo={signOut} />
-             
 
                 <div>
 
@@ -72,7 +68,7 @@ const Profile = () => {
                                             <h4>{price}.00 USD</h4>
 
                                             {/* ///////////////// */}
-                                           
+
                                             <Link to={{
                                                 pathname: path + creator.toLowerCase(),
                                                 state: {

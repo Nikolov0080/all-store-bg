@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Modal, Button } from "react-bootstrap";
 
-
-
 const DeleteModal = ({ delFunc, id, text }) => {
 
     const [show, setShow] = useState(false);
@@ -41,4 +39,4 @@ const DeleteModal = ({ delFunc, id, text }) => {
     )
 }
 
-export default DeleteModal
+export default DeleteModal;

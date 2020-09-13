@@ -14,7 +14,7 @@ const ProductDetails = (props) => {
     const productId = props.location.state.productId;
     const isCreator = props.location.state.isCreator;
     const [currentProduct, setCurrentProduct] = useState(null);
-    const [buy, setBuy] = useState(false);
+    const [buy, setBuy] = useState(false); 
 
     useEffect(() => {
 
@@ -25,16 +25,16 @@ const ProductDetails = (props) => {
                 Object.assign(acc, cVal)
 
                 return acc;
-            }, {})
+            }, {});
 
-            setCurrentProduct(allProds[productId])
+            setCurrentProduct(allProds[productId]);
         })
     }, [productId]);
 
     const deleteOne = (CP) => {
         deleteProduct(CP.creatorId, CP.imageId).then((response) => {
             history.goBack();
-        }).catch((e) => { console.log(e); return })
+        }).catch((e) => { console.log(e); return });
     }
 
     if (currentProduct === null) {
@@ -65,11 +65,11 @@ const ProductDetails = (props) => {
                 </div>
 
                 {isCreator === true
-                    ? <DeleteModal delFunc={deleteOne} id={currentProduct}/>// TODO complete delete functionality
+                    ? <DeleteModal delFunc={deleteOne} id={currentProduct} />// TODO complete delete functionality
                     : <Button variant="success" onClick={() => setBuy(true)}>Buy</Button>
                 }
             </Card>
-            {buy !== false ? <BuyForm /> : ''}
+            {buy !== false ? <BuyForm hide={setBuy}  /> : ''}
         </div>
     )
 }

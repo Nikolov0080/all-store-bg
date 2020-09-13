@@ -6,15 +6,14 @@ const currentUserProducts = (setProducts, ID) => {
     
     return  firebase.database().ref('users').once('value', (snap) => {
         snap.forEach((data) => {
-            console.log(data.key)
-            console.log(ID)
+
             if (ID === data.key) {
                 const prods = Object.values(data.val())
                 prods.forEach( (productData) => {
                     
                   getImage(productData.imageId).then(async(imageResponse) => {
                         
-                     setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
+                  return setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
                     })
                 })
 

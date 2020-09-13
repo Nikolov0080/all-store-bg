@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap';
 const Dropdown = ({ name, reg, placeholder ,label}) => {
     return (
         <div>
-
+            <Form.Label>Select Condition</Form.Label>
             <Form.Control
                 className={style.drop}
                 as="select"
