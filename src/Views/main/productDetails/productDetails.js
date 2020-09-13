@@ -5,7 +5,8 @@ import style from './details.module.css';
 import BuyForm from '../../components/buyForm/buyForm';
 import ProductsTable from './productTable';
 import deleteProduct from '../../../firebase/models/products/deleteProduct/deleteProduct';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import DeleteModal from '../../components/modals/modal';
 
 const ProductDetails = (props) => {
 
@@ -30,10 +31,10 @@ const ProductDetails = (props) => {
         })
     }, [productId]);
 
-    const deleteOne = () => {
-        deleteProduct(currentProduct.creatorId, currentProduct.imageId).then(()=>{
+    const deleteOne = (CP) => {
+        deleteProduct(CP.creatorId, CP.imageId).then((response) => {
             history.goBack();
-        })
+        }).catch((e) => { console.log(e); return })
     }
 
     if (currentProduct === null) {
@@ -64,7 +65,7 @@ const ProductDetails = (props) => {
                 </div>
 
                 {isCreator === true
-                    ? <Button variant="danger" onClick={deleteOne}> Delete</Button> // TODO complete delete functionality
+                    ? <DeleteModal delFunc={deleteOne} id={currentProduct}/>// TODO complete delete functionality
                     : <Button variant="success" onClick={() => setBuy(true)}>Buy</Button>
                 }
             </Card>

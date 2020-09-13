@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
-import { Button, Card, Row, Col, Alert } from 'react-bootstrap';
+import React, { useState, useEffect, useContext } from 'react'
+import { Button, Card, Row, Col } from 'react-bootstrap';
 import signOut from '../../../firebase/models/user/signOut/signOut';
 import { Link } from 'react-router-dom';
 import CUProducts from '../../../firebase/models/products/currentUserProds/CUProducts';
@@ -8,20 +8,19 @@ import style from './profile.module.css';
 import Loading from '../../components/loading/loading';
 import BtnGroup from '../../components/buttonGroup/btnGroup';
 import deleteProduct from '../../../firebase/models/products/deleteProduct/deleteProduct';
+import DeleteModal from '../../components/modals/modal';
 
 const Profile = () => {
 
     const context = useContext(Context)
     const [products, setProducts] = useState('');
     const [loading, setLoading] = useState(true);
-    const productsRef = useRef('');
-
     const path = `/products/`;
 
     const deleteOne = (id) => {
         setLoading(true)
-        deleteProduct(context.user.uid, id).then(resp=>{
-            CUProducts(setProducts, context.user.uid).then(()=>{
+        deleteProduct(context.user.uid, id).then(resp => {
+            CUProducts(setProducts, context.user.uid).then(() => {
                 setTimeout(() => {
                     setLoading(false)
                 }, 550)
@@ -42,23 +41,24 @@ const Profile = () => {
 
 
     }, [context]);
-  
+
     if (loading && products === '') {
         return (
             <Loading />
         )
     }
-    // TODO fix loading
 
     if (products !== '') {
 
         return (
             <div>
+                
 
-                <BtnGroup />
+                <BtnGroup foo={signOut} />
+             
 
                 <div>
-                    <Alert className="text-center" variant="primary"><h1>Items you sell</h1></Alert>
+
                     <Row >
                         {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
                             return (
@@ -72,6 +72,7 @@ const Profile = () => {
                                             <h4>{price}.00 USD</h4>
 
                                             {/* ///////////////// */}
+                                           
                                             <Link to={{
                                                 pathname: path + creator.toLowerCase(),
                                                 state: {
@@ -79,11 +80,10 @@ const Profile = () => {
                                                     isCreator: !!(creatorId === context.user.uid)
                                                 }
                                             }}>
-                                                <Button variant="success" style={{ width: "50%" }}>Details</Button>
+                                                <Button variant="success" style={{ width: "100%" }}>Details</Button>
                                             </Link>
                                             {/* ///////////////// */}
-
-                                            <Button variant="danger" onClick={() => deleteOne(imageId)} style={{ width: "50%" }}>Delete</Button>
+                                            <DeleteModal delFunc={deleteOne} id={imageId} />
                                             {/* TODO */}
 
                                         </Card.Body>
@@ -92,16 +92,16 @@ const Profile = () => {
                             )
                         })}
                     </Row>
-                    <Button onClick={signOut}>sign out</Button>
                 </div>
+
             </div>
         )
     }
 
     return (
         <div>
-            <BtnGroup />
-            <Alert className="text-center" variant="primary"><h1>No items to show</h1></Alert>
+            <BtnGroup foo={signOut} />
+            <Card className="text-center" variant="primary"><h1>No items to show</h1></Card>
         </div>
     )
 }

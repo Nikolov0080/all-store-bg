@@ -10,8 +10,6 @@ const dbRef = firebase.database().ref('users');
 
 const createProduct = (data) => {
 
-    var promises = [];
-
     const currentId = ID();
 
     const { condition, description, price, title, userId, username } = data;

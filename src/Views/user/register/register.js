@@ -41,7 +41,7 @@ const Register = () => {
                             reg={register({
                                 required: true,
                                 minLength: 6,
-                                pattern: /^(?:[A-Za-z\d])+$/
+                                pattern: /^(?:[A-Za-z\d_-])+$/
                             })}
                             placeholder="Username"
                             type="text"

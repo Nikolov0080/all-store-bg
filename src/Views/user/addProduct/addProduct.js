@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Button } from 'react-bootstrap';
 import Input from '../../components/input/input';
@@ -11,20 +11,29 @@ import { useHistory } from 'react-router-dom';
 
 const AddProduct = () => {
 
+    const [btnStyle, setBtnStyle] = useState({ variant: "success", text: "Add", disabled: false })
     const context = useContext(Context);
     const { handleSubmit, register, errors } = useForm();
     const history = useHistory()
 
+    const submitted = () => {
+
+        setBtnStyle({ variant: "disabled", text: "loading...", disabled: true })
+
+    }
+
     const addProduct = (data) => {
+        submitted()
         firebaseCreateProduct({
             ...data,
             userId: context.user.uid,
             username: context.user.displayName
-        }).then((resp)=>{
-           if(resp){
-               history.push('/profile')
-           }
+        }).then((resp) => {
+            if (resp) {
+                history.push('/profile')
+            }
         })
+
     }
 
     return (
@@ -95,7 +104,7 @@ const AddProduct = () => {
                 {errors.image && errors.image.type === "validate" && <ErrMsg message="Image must be under 5MB" />}
                 {errors.image && errors.image.type === "required" && <ErrMsg message="Image is required" />}
 
-                <Button type="submit" variant="success">Add</Button>
+                <Button disabled={btnStyle.disabled} type="submit" variant={btnStyle.variant}>{btnStyle.text}</Button>
             </form>
             add product
         </div>
