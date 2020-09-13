@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import { Button, Card, Row, Col, Alert } from 'react-bootstrap';
 import signOut from '../../../firebase/models/user/signOut/signOut';
 import { Link } from 'react-router-dom';
@@ -14,11 +14,19 @@ const Profile = () => {
     const context = useContext(Context)
     const [products, setProducts] = useState('');
     const [loading, setLoading] = useState(true);
+    const productsRef = useRef('');
 
     const path = `/products/`;
 
     const deleteOne = (id) => {
-        deleteProduct(context.user.uid, id)
+        setLoading(true)
+        deleteProduct(context.user.uid, id).then(resp=>{
+            CUProducts(setProducts, context.user.uid).then(()=>{
+                setTimeout(() => {
+                    setLoading(false)
+                }, 550)
+            })
+        })
         console.log("deleted!")
     }
 
@@ -31,8 +39,10 @@ const Profile = () => {
                 }, 550)
             }
         });
-    }, [context]);
 
+
+    }, [context]);
+  
     if (loading && products === '') {
         return (
             <Loading />
@@ -51,7 +61,6 @@ const Profile = () => {
                     <Alert className="text-center" variant="primary"><h1>Items you sell</h1></Alert>
                     <Row >
                         {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
-
                             return (
                                 <Col sm key={index}>
 

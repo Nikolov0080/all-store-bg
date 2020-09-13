@@ -10,12 +10,14 @@ const dbRef = firebase.database().ref('users');
 
 const createProduct = (data) => {
 
+    var promises = [];
+
     const currentId = ID();
 
     const { condition, description, price, title, userId, username } = data;
     const { image } = data
 
-    dbRef.child(userId).child(currentId).set({
+    const a = dbRef.child(userId).child(currentId).set({
         condition,
         description,
         price,
@@ -24,16 +26,29 @@ const createProduct = (data) => {
         createdAt: moment().format('L'),
         imageId: currentId,
         creatorId: userId
-    }).then(() => {
-
-        const storageRef = firebase.storage().ref('images/' + currentId)
-
-        compressor(image).then((img) => {
-            storageRef.put(img).then((response) => {
-                console.log(response)
-            }).catch(e => console.log(e))
-        })
     })
+
+
+    const storageRef = firebase.storage().ref('images/' + currentId)
+
+
+   const b =  compressor(image).then((img) => {
+        return storageRef.put(img).then((response) => {
+            if (response) {
+
+                console.log("Created")
+                return a = response
+            }
+        }).catch(err => console.log(err))
+    })
+
+    // TODO implement Promise.all to the promises
+
+console.log(a);
+console.log(b)
+
+
+
 }
 
 export default createProduct;

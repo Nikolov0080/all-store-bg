@@ -8,10 +8,11 @@ const deleteProduct = (userId, id) => {
 
    return storageRef.delete().then((response) => {
         userRef.remove(err=>{
-            console.log(err);
-        }).then((result)=>{
-            console.log(result)
-            return
+          
+            if(err){  console.log(err); return}
+        }).then(()=>{
+            console.log("Deleted")
+            return true
         })
     })
 }
