@@ -1,10 +1,7 @@
 import firebase from 'firebase';
 import moment from 'moment';
-import compressor from '../../../../utils/compressor';
-
-const ID = () => {
-    return '-' + Math.random().toString(36).substr(2, 9);
-};
+import compressor from '../../../../utils/fileCompressor/compressor';
+import ID from '../../../../utils/Id-creator.js/id_creator';
 
 const dbRef = firebase.database().ref('users');
 

@@ -5,12 +5,12 @@ import { Container, Button } from 'react-bootstrap';
 import ErrMsg from './errMsg';
 import placeOrder from '../../../firebase/models/user/orders/placeOrder/placeOrder';
 
-const BuyForm = ({ hide }) => {
+const BuyForm = ({ hide, productData }) => {
 
     const { handleSubmit, register, errors } = useForm();
 
     const completeOrder = (data) => {
-        placeOrder(data)    
+        placeOrder({...data,...productData})
     }
 
     return (

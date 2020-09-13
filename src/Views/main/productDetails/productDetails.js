@@ -68,8 +68,9 @@ const ProductDetails = (props) => {
                     ? <DeleteModal delFunc={deleteOne} id={currentProduct} />// TODO complete delete functionality
                     : <Button variant="success" onClick={() => setBuy(true)}>Buy</Button>
                 }
+
             </Card>
-            {buy !== false ? <BuyForm hide={setBuy}  /> : ''}
+            {buy !== false ? <BuyForm hide={setBuy} productData={currentProduct} /> : ''}
         </div>
     )
 }
