@@ -5,7 +5,9 @@ import getOrders from '../../../firebase/models/user/orders/getOrders/getOrders'
 const MyOrders = () => {
 
     const context = useContext(Context);
-getOrders(context.user.uid)
+const orders = getOrders(context.user.uid);
+
+console.log(orders)
     return (
         <div>
           
