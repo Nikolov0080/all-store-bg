@@ -11,25 +11,38 @@ import DeleteModal from '../../components/modals/modal';
 const ProductDetails = (props) => {
 
     const history = useHistory();
+    const userId = props.location.state.userId;
     const productId = props.location.state.productId;
     const isCreator = props.location.state.isCreator;
     const [currentProduct, setCurrentProduct] = useState(null);
-    const [buy, setBuy] = useState(false); 
+    const [buy, setBuy] = useState(false);
 
     useEffect(() => {
 
-        firebase.database().ref('users/').once('value', (snapshot) => {
+        firebase.database().ref('users').once('value', (snapshot) => {
 
-            const allProds = Object.values(snapshot.val()).reduce((acc, cVal) => {
+            const data = snapshot.val()
+            if (data) {
+                const cProduct = Object.values(data).reduce((acc, cVal) => {
 
-                Object.assign(acc, cVal)
+                    const products = Object.values(cVal)[0];
 
-                return acc;
-            }, {});
+                    for (const key in products) {
+                        if (key === productId) {
+                           Object.assign(acc,products[key]) 
+                           
+                        }
+                    }
 
-            setCurrentProduct(allProds[productId]);
-        })
-    }, [productId]);
+                    return acc
+                }, {})
+                
+                    setCurrentProduct(cProduct);
+            }
+
+        });
+
+    }, [productId, userId]);
 
     const deleteOne = (CP) => {
         deleteProduct(CP.creatorId, CP.imageId).then((response) => {
@@ -39,7 +52,7 @@ const ProductDetails = (props) => {
 
     if (currentProduct === null) {
         return (
-            <h1>Loading...</h1>
+            <h1>Loading... </h1>
         )
     }
 
@@ -70,7 +83,7 @@ const ProductDetails = (props) => {
                 }
 
             </Card>
-            {buy !== false ? <BuyForm hide={setBuy} productData={currentProduct} /> : ''}
+            {buy !== false ? <BuyForm hide={setBuy} productData={{...currentProduct,buyerId:userId}} /> : ''}
         </div>
     )
 }

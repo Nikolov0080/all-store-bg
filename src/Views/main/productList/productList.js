@@ -64,7 +64,7 @@ const ProductList = (props) => {
                                             </Card.Footer>
                                             <Link to={{
                                                 pathname: path + creator.toLowerCase(),
-                                                state: { productId: imageId, imageUrl,
+                                                state: { productId: imageId, imageUrl,userId:context.user.uid,
                                                 isCreator:!!(creatorId === context.user.uid)
                                                 }
                                             }}>

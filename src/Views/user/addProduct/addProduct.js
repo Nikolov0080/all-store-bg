@@ -33,7 +33,6 @@ const AddProduct = () => {
                 history.push('/profile')
             }
         })
-
     }
 
     return (

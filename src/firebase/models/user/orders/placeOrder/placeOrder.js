@@ -1,23 +1,49 @@
 import firebase from 'firebase';
-import ID from '../../../../../utils/Id-creator.js/id_creator';
-
-const userRef = firebase.database().ref("users")
 
 const placeOrder = (data) => {
-    const currentId = ID();
 
     const {
         creatorId,
+        buyerId,
         price,
-        description,
         imageId,
         title,
-        condition
+        condition,
+        fullName,
+        city,
+        postOffice,
+        phoneNumber
     } = data
 
-    userRef.child(creatorId + "/purchases/" + currentId).set({price,imageId,title,condition})
 
-    console.log(data)
+    const userRef = firebase.database().ref("users").child(buyerId + "/purchases/")
+    const deleteData = firebase.database().ref("users").child(creatorId + "/products/").child(imageId)
+    // const deleteImage = firebase.storage().ref("images/").child(imageId)
+    // deleteImage.delete()
+
+
+    userRef.push({
+        orderDetails: {
+            price,
+            imageId,
+            title,
+            condition
+        },
+        address: {
+            fullName,
+            city,
+            postOffice,
+            phoneNumber
+        }
+
+    }).then((resp) => {
+
+        deleteData.remove()
+
+    }).catch((err) => {
+        console.log(err);
+    })
+
 }
 
 export default placeOrder;

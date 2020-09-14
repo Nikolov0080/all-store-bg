@@ -9,8 +9,9 @@ import Loading from '../../components/loading/loading';
 import BtnGroup from '../../components/buttonGroup/btnGroup';
 import deleteProduct from '../../../firebase/models/products/deleteProduct/deleteProduct';
 import DeleteModal from '../../components/modals/modal';
+import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
 
-const Profile = () => {
+const Profile = (props) => {
 
     const context = useContext(Context)
     const [products, setProducts] = useState('');
@@ -18,7 +19,7 @@ const Profile = () => {
     const path = `/products/`;
 
     const deleteOne = (id) => {
-        setLoading(true)
+        setLoading(true);
         deleteProduct(context.user.uid, id).then(resp => {
             CUProducts(setProducts, context.user.uid).then(() => {
                 setTimeout(() => {
@@ -30,12 +31,11 @@ const Profile = () => {
     }
 
     useEffect(() => {
-
         CUProducts(setProducts, context.user.uid).then((response) => {
             if (response) {
                 setTimeout(() => {
                     setLoading(false)
-                }, 550)
+                }, 500)
             }
         });
     }, [context]);
@@ -49,48 +49,46 @@ const Profile = () => {
     if (products !== '') {
 
         return (
-            <div>
-
-                <BtnGroup foo={signOut} />
-
+            <ErrorBoundary>
                 <div>
+                    <BtnGroup foo={signOut} />
+                    <div>
 
-                    <Row >
-                        {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
-                            return (
-                                <Col sm key={index}>
+                        <Row >
+                            {products.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {
+                                return (
+                                    <Col sm key={index}>
 
-                                    <Card className={style.size}>
-                                        <Card.Img className={style.sizeImg} variant="top" src={imageUrl} />
-                                        <Card.Body>
-                                            <Card.Title>{title}</Card.Title>
+                                        <Card className={style.size}>
+                                            <Card.Img className={style.sizeImg} variant="top" src={imageUrl} />
+                                            <Card.Body>
+                                                <Card.Title>{title}</Card.Title>
 
-                                            <h4>{price}.00 USD</h4>
+                                                <h4 style={{color:"green"}}>{price}.00 USD</h4>
 
-                                            {/* ///////////////// */}
+                                                <Link to={{
+                                                    pathname: path + creator.toLowerCase(),
+                                                    state: {
+                                                        productId: imageId, imageUrl, userId: context.user.uid,
+                                                        isCreator: !!(creatorId === context.user.uid)
+                                                    }
+                                                }}>
+                                                    <Button variant="success" style={{ width: "100%" }}>Details</Button>
+                                                </Link>
 
-                                            <Link to={{
-                                                pathname: path + creator.toLowerCase(),
-                                                state: {
-                                                    productId: imageId, imageUrl,
-                                                    isCreator: !!(creatorId === context.user.uid)
-                                                }
-                                            }}>
-                                                <Button variant="success" style={{ width: "100%" }}>Details</Button>
-                                            </Link>
-                                            {/* ///////////////// */}
-                                            <DeleteModal delFunc={deleteOne} id={imageId} />
-                                            {/* TODO */}
+                                                <DeleteModal delFunc={deleteOne} id={imageId} />
 
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            )
-                        })}
-                    </Row>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                )
+                            })}
+                        </Row>
+                    </div>
+
                 </div>
+            </ErrorBoundary>
 
-            </div>
         )
     }
 

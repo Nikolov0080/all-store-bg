@@ -12,7 +12,7 @@ const createProduct = (data) => {
     const { condition, description, price, title, userId, username } = data;
     const { image } = data
 
-    var a = Promise.resolve(dbRef.child(userId).child(currentId).set({
+    var a = Promise.resolve(dbRef.child(userId).child('/products/' + currentId).set({
         condition,
         description,
         price,
