@@ -12,7 +12,7 @@ const Order = ({ address, orderDetails }) => {
                 <Card.Header as="h1">{orderDetails.title}</Card.Header>
                 <Row sm>
                     <Col sm>
-                        <Card.Img src={orderDetails.imageUrl}></Card.Img>
+                        <Card.Img className={style.image_Size} src={orderDetails.imageUrl}></Card.Img>
                     </Col>
                     <Col className={style.table} >
                         <AddressTable // RENAME TODO
