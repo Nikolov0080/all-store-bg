@@ -7,6 +7,7 @@ const placeOrder = (data) => {
         buyerId,
         price,
         imageId,
+        imageUrl,
         title,
         condition,
         fullName,
@@ -27,7 +28,8 @@ const placeOrder = (data) => {
             price,
             imageId,
             title,
-            condition
+            condition,
+            imageUrl
         },
         address: {
             fullName,

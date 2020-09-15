@@ -55,7 +55,6 @@ const ProductDetails = (props) => {
             <h1>Loading... </h1>
         )
     }
-
     return (
 
         <div>
@@ -83,7 +82,7 @@ const ProductDetails = (props) => {
                 }
 
             </Card>
-            {buy !== false ? <BuyForm hide={setBuy} productData={{...currentProduct,buyerId:userId}} /> : ''}
+            {buy !== false ? <BuyForm hide={setBuy} productData={{...currentProduct,buyerId:userId,imageUrl:props.location.state.imageUrl}} /> : ''}
         </div>
     )
 }

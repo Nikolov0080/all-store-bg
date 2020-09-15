@@ -8,18 +8,21 @@ const getImagePromise = (id) => {
 const getProducts = (setProducts) => {
 
     return firebase.database().ref('users').once('value', (snapshot) => {// get all users and userProducts in DB
+
         snapshot.forEach(item => {
 
-            const prods = Object.values(item.val());
+            if (item.val().hasOwnProperty('products')) {
+                const prods = Object.values(item.val());
+                prods.forEach((roughData) => {
+                    Object.values(roughData).forEach((productData) => {
+                        getImagePromise(productData.imageId).then((imageResponse) => {
 
-            prods.forEach((roughData) => {
-                Object.values(roughData).forEach((productData) => {
-                    getImagePromise(productData.imageId).then((imageResponse) => {
-
-                        return setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
+                            return setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
+                        })
                     })
                 })
-            })
+            }
+
         })
     })
 }
