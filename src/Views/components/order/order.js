@@ -22,7 +22,8 @@ const userId = useContext(Context).user.uid
                             address={address}
                             orderDetails={orderDetails}
                         />
-                        <Button onClick={() => completeOrder(orderDetails.imageId,userId)}
+                        <Button onClick={() =>
+                         completeOrder(orderDetails.imageId,userId,orderDetails.orderId)}
                             variant="success"
                             style={{ width: "100%" }} >Confirm received</Button>
                     </Col>

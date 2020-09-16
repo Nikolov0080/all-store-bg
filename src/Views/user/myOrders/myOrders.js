@@ -28,8 +28,6 @@ const MyOrders = () => {
         )
     }
 
-    // console.log(orders)
-
     return (
         <div>
             {orders.map(({ address, orderDetails }, index) => {

@@ -17,10 +17,12 @@ const getOrders = (userId, setOrders) => {
         for (const key in snapshot) {
             if (snapshot.hasOwnProperty(key)) {
                 const element = snapshot[key];
+                element.orderDetails.orderId = key;
                 formattedData.push(element)
             }
         }
-        setOrders(formattedData)
+
+        setOrders(formattedData);
     })
 }
 
