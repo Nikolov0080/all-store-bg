@@ -1,27 +1,20 @@
-import React, { useContext, useState } from 'react'
-import { Card, Row, Col, Button } from 'react-bootstrap';
+import React, { useContext } from 'react'
+import { Card, Row, Col } from 'react-bootstrap';
 import OrderTable from './orderTable';
 import style from './orders.module.css';
 import completeOrder from '../../../firebase/models/user/orders/completeOrder/completeOrder';
 import Context from '../../../context/context';
+import CompleteModal from '../../components/modals/modalComplete';
 
 const Order = ({ address, orderDetails, refreshOrders }) => {
     // console.log(address)
     // console.log(orderDetails)
-    const [btnStyle, setBtnStyle] = useState({
-        variant: "success",
-        disabled: false,
-        text: "Confirm received"
-    })
+   
 
     const complete = () => {
-        setBtnStyle({
-            variant: "disabled",
-            disabled: true,
-            text: "loading..."
-        })
+       
+        refreshOrders(true);
     }
-
 
     const userId = useContext(Context).user.uid
     return (
@@ -37,15 +30,9 @@ const Order = ({ address, orderDetails, refreshOrders }) => {
                             address={address}
                             orderDetails={orderDetails}
                         />
-                        <Button onClick={() => {
-                            refreshOrders(true);
-                            completeOrder(orderDetails.imageId, userId, orderDetails.orderId);
-                            complete();
-                        }
-                        }
-                            disabled={btnStyle.disabled}
-                            variant={btnStyle.variant}
-                            style={{ width: "100%" }} >{btnStyle.text}</Button>
+                      
+
+                        <CompleteModal complete={complete} func={() => completeOrder(orderDetails.imageId, userId, orderDetails.orderId)} />
                     </Col>
                 </Row>
             </Card>

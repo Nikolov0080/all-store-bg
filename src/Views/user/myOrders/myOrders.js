@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Card ,Button} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Context from '../../../context/context';
 import getOrders from '../../../firebase/models/user/orders/getOrders/getOrders';
 import Loading from '../../components/loading/loading';
@@ -13,19 +15,23 @@ const MyOrders = () => {
 
     useEffect(() => {
 
-        if(refreshOrders){
-             getOrders(context.user.uid, setOrders).then(() => {
-            setLoading(false);
-            setRefreshOrders(false);
-        });
+        if (refreshOrders) {
+            getOrders(context.user.uid, setOrders).then(() => {
+                setLoading(false);
+                setRefreshOrders(false);
+            });
         }
-       
 
-    }, [context, setOrders,setRefreshOrders,refreshOrders]);
+    }, [context, setOrders, setRefreshOrders, refreshOrders]);
 
-    if (orders.length === 0) {
+    if (orders.length === 0 && loading === false) {
         return (
-            <h1>No orders</h1>
+            <Card className="text-center">
+                <Card.Header><h1>No orders</h1></Card.Header>
+                <Link to="/products">
+                <Button size="lg">Make Order</Button>
+                </Link>
+            </Card>
         )
     }
 
