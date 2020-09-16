@@ -1,14 +1,29 @@
-import React,{useContext} from 'react'
+import React, { useContext, useState } from 'react'
 import { Card, Row, Col, Button } from 'react-bootstrap';
 import OrderTable from './orderTable';
 import style from './orders.module.css';
 import completeOrder from '../../../firebase/models/user/orders/completeOrder/completeOrder';
 import Context from '../../../context/context';
 
-const Order = ({ address, orderDetails }) => {
+const Order = ({ address, orderDetails, refreshOrders }) => {
     // console.log(address)
     // console.log(orderDetails)
-const userId = useContext(Context).user.uid
+    const [btnStyle, setBtnStyle] = useState({
+        variant: "success",
+        disabled: false,
+        text: "Confirm received"
+    })
+
+    const complete = () => {
+        setBtnStyle({
+            variant: "disabled",
+            disabled: true,
+            text: "loading..."
+        })
+    }
+
+
+    const userId = useContext(Context).user.uid
     return (
         <div className="mt-5">
             <Card className="mt-3">
@@ -22,10 +37,15 @@ const userId = useContext(Context).user.uid
                             address={address}
                             orderDetails={orderDetails}
                         />
-                        <Button onClick={() =>
-                         completeOrder(orderDetails.imageId,userId,orderDetails.orderId)}
-                            variant="success"
-                            style={{ width: "100%" }} >Confirm received</Button>
+                        <Button onClick={() => {
+                            refreshOrders(true);
+                            completeOrder(orderDetails.imageId, userId, orderDetails.orderId);
+                            complete();
+                        }
+                        }
+                            disabled={btnStyle.disabled}
+                            variant={btnStyle.variant}
+                            style={{ width: "100%" }} >{btnStyle.text}</Button>
                     </Col>
                 </Row>
             </Card>
