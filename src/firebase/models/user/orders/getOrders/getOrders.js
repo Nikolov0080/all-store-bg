@@ -8,11 +8,11 @@ const getOrders = (userId, setOrders) => {
 
     return ordersRef.once('value', (snap) => {
         snap.forEach((data) => {
-            console.log("ID - " + data.key);
+            // console.log("ID - " + data.key);
             // console.log("Order Data - " + JSON.stringify(data.val(),null,1));
         });
-        
-const snapshot = snap.val();
+
+        const snapshot = snap.val();
 
         for (const key in snapshot) {
             if (snapshot.hasOwnProperty(key)) {

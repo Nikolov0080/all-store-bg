@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap';
 
-const AddressTable = ({ address, orderDetails }) => {
+const OrderTable = ({ address, orderDetails }) => {
 
 const {
 fullName,
@@ -27,7 +27,7 @@ condition
                 <tbody>
                     <tr>
                         <td>Name: <b>{fullName}</b></td>
-                        <td>Price: <b style={{color:"green"}}>{price} USD</b></td>
+                        <td>Price: <b style={{color:"green"}}>{price}.00 USD</b></td>
                     </tr>
                     <tr>
                         <td>City: <b>{city}</b></td>
@@ -45,4 +45,4 @@ condition
     )
 }
 
-export default AddressTable
+export default OrderTable;
