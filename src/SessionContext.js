@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Context from './context/context';
 import firebase from 'firebase';
 import { Spinner } from 'react-bootstrap';
@@ -6,6 +6,7 @@ import './firebase/SDK';
 
 const SessionContext = (props) => {
 
+    
     const [user, setUser] = useState('GUEST');
     const [loading,setLoading] = useState(true)
 
@@ -17,15 +18,19 @@ const SessionContext = (props) => {
         setUser("GUEST")
     }
 
-    firebase.auth().onAuthStateChanged(function (user) {
+
+    useEffect(()=>{
+        firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             setUser(user);
             setLoading(false);
         } else {
-            setUser(null)
-            setLoading(false);
+                 setLoading(false);
+                 setUser(null)
         }
     });
+    },[setUser,setLoading])
+    
 
     if (loading) {
         return (

@@ -6,7 +6,7 @@ import firebaseLogin from '../../../firebase/models/user/login/login';
 import ErrMsg from './errMsg';
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
 
-const Login = () => {
+const Login = (props) => {
     const { handleSubmit, register, errors } = useForm();
     const [err, setErr] = useState(false);
     const [dbErr, setDbErr] = useState(false);
@@ -15,6 +15,14 @@ const Login = () => {
 
         try {
             firebaseLogin(email, password).then((resp) => {
+                console.log(resp)
+                props.history.push({
+                    pathname: '/', state: {
+                        type: "success",
+                        message: "WELCOME !",
+                        show: true
+                    }
+                })
 
                 if (resp === false) {
                     setErr('Nu such user, or wrong Email or Password')
@@ -24,7 +32,7 @@ const Login = () => {
             setDbErr(error)
         }
     }
-    
+
     return (
         <div className="text-center">
             <ErrorBoundary message={'Wrong input , try again'}>

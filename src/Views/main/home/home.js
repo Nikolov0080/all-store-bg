@@ -1,16 +1,13 @@
 import React from 'react'
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
-import Notifications from '../../components/notifications/notifications';
 
-const Home = (props) => {
-
-const notification = props.location.state;
-
-
+const Home = ({ location }) => {
+//TODO -- FINISH NOTIFICATIONS!!!
+console.log(location)
     return (
         <ErrorBoundary>
-            
-            <Notifications type="info" message="dsdsdo" show={true}/>
+            d
+            {/* <Notifications type="info" message="do" show={true}/> */}
 
         </ErrorBoundary>
 

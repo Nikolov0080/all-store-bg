@@ -6,15 +6,14 @@ const ProtectedRouteGuest = ({ path, component }) => {
 
     const isAuth = !!useContext(UserContext).user;
 
-    if (isAuth) {
-        return (
-            <Route path={path} component={component} />
-        );
-    } else {
-        return (
-            <Redirect to={{ pathname: '/' }} />
-        )
-    }
+    return (
+        <div>
+            {isAuth
+                ? <Route path={path} component={component} />
+                : <Redirect to={{ pathname: '/' }} />
+            }
+        </div>
+    )
 };
 
 export default ProtectedRouteGuest;
