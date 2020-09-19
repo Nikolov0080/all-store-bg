@@ -24,14 +24,13 @@ const CompleteModal = ({ func, complete }) => {
 
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Are you sure you want to delete this Product?</Modal.Title>
+                        <Modal.Title>Are you sure you want to continue?</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Once deleted the product cannot be restored!!!</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={() => handleClose(false)}>
+                        <Button variant="danger" onClick={() => handleClose(false)}>
                             Cancel
                        </Button>
-                        <Button variant="danger" onClick={() => handleClose(true)}>
+                        <Button variant="success" onClick={() => handleClose(true)}>
                             Confirm
                       </Button>
                     </Modal.Footer>

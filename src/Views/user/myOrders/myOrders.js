@@ -60,4 +60,4 @@ const MyOrders = () => {
     )
 }
 
-export default MyOrders
+export default MyOrders;

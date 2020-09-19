@@ -23,7 +23,7 @@ const placeOrder = (data) => {
     // deleteImage.delete()
 
 
-    userRef.push({
+  return  userRef.push({
         orderDetails: {
             price,
             imageId,

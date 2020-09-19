@@ -1,13 +1,17 @@
 import React from 'react'
+import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
 
 const Home = (props) => {
-  
-        
+
     return (
-    <div>
-            Home
+        <ErrorBoundary>
+            <div>
+                Home
+                sdfsdfds
         </div>
+        </ErrorBoundary>
+
     )
 }
 
-export default Home
+export default Home;

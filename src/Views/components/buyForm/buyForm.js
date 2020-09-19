@@ -4,13 +4,17 @@ import Input from '../input/input';
 import { Container, Button } from 'react-bootstrap';
 import ErrMsg from './errMsg';
 import placeOrder from '../../../firebase/models/user/orders/placeOrder/placeOrder';
+import {useHistory} from 'react-router-dom';
 
 const BuyForm = ({ hide, productData }) => {
 
+    const history = useHistory();
     const { handleSubmit, register, errors } = useForm();
 
     const completeOrder = (data) => {
-        placeOrder({...data,...productData})
+        placeOrder({...data,...productData}).then((response)=>{
+           history.push('/my-orders');
+        }).catch((e)=>console.log(e));
     }
 
     return (
