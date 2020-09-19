@@ -1,5 +1,5 @@
 import React from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Zoom } from 'react-toastify';
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
 
 const Notifications = ({ type, message, show }) => {
@@ -8,6 +8,11 @@ const Notifications = ({ type, message, show }) => {
         switch (type) {
             case "info":
                 toast.info(message,{
+                    toastId:id
+                })
+                break;
+                case "error":
+                toast.error(message,{
                     toastId:id
                 })
                 break;
@@ -34,16 +39,14 @@ const Notifications = ({ type, message, show }) => {
                         autoClose={6000}
                         position="top-center"
                         limit={1}
-                        closeButton={false}
                         closeOnClick={false}
+                        transition={Zoom}
                     />
                     : ''
                 }
             </ErrorBoundary>
         </div >
-
-
     )
 }
 
-export default Notifications
+export default Notifications;

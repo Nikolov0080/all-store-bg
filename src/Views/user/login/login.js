@@ -7,8 +7,7 @@ import ErrMsg from './errMsg';
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
 
 const Login = () => {
-
-    const { handleSubmit, register,errors } = useForm();
+    const { handleSubmit, register, errors } = useForm();
     const [err, setErr] = useState(false);
     const [dbErr, setDbErr] = useState(false);
 
@@ -16,6 +15,7 @@ const Login = () => {
 
         try {
             firebaseLogin(email, password).then((resp) => {
+
                 if (resp === false) {
                     setErr('Nu such user, or wrong Email or Password')
                 }
@@ -23,9 +23,8 @@ const Login = () => {
         } catch (error) {
             setDbErr(error)
         }
-
     }
-
+    
     return (
         <div className="text-center">
             <ErrorBoundary message={'Wrong input , try again'}>
@@ -47,8 +46,8 @@ const Login = () => {
                             placeholder="Email"
                             type="email"
                         />
-                    {errors.password && errors.password.type === 'required' && <ErrMsg message="Password is required" />}
-                    {errors.password && errors.password.type === 'minLength' && <ErrMsg message="Password must be 6 characters" />}
+                        {errors.password && errors.password.type === 'required' && <ErrMsg message="Password is required" />}
+                        {errors.password && errors.password.type === 'minLength' && <ErrMsg message="Password must be 6 characters" />}
 
                         <Input
                             name="password"
@@ -56,7 +55,7 @@ const Login = () => {
                                 required: true,
                                 minLength: 6
                             })}
-                        placeholder="Password"
+                            placeholder="Password"
                             type="password"
                         />
 
