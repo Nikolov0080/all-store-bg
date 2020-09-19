@@ -46,7 +46,10 @@ const ProductDetails = (props) => {
 
     const deleteOne = (CP) => {
         deleteProduct(CP.creatorId, CP.imageId).then((response) => {
-            history.goBack();
+            history.push({
+                pathname:'/profile',
+            state:'Deleted'
+            });
         }).catch((e) => { console.log(e); return });
     }
 

@@ -30,7 +30,14 @@ const AddProduct = () => {
             username: context.user.displayName
         }).then((resp) => {
             if (resp) {
-                history.push('/profile')
+                history.push({
+                    pathname:"/profile",
+                    state:{
+                        type:"success",
+                        message:"PRODUCT CREATED !",
+                        show:true
+                    }
+                })
             }
         })
     }

@@ -10,9 +10,11 @@ import BtnGroup from '../../components/buttonGroup/btnGroup';
 import deleteProduct from '../../../firebase/models/products/deleteProduct/deleteProduct';
 import DeleteModal from '../../components/modals/modal';
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
+import Notifications from '../../components/notifications/notifications';
 
 const Profile = (props) => {
 
+    const notification = props.location.state;
     const context = useContext(Context)
     const [products, setProducts] = useState('');
     const [loading, setLoading] = useState(true);
@@ -45,12 +47,19 @@ const Profile = (props) => {
             <Loading />
         )
     }
-
     if (products !== '') {
 
         return (
             <ErrorBoundary>
+
+                {!!(notification) === true ?
+                    <Notifications type={notification.type} message={notification.message} show={notification.show} />
+                    :
+                    ""
+                }
+
                 <div>
+
                     <BtnGroup foo={signOut} />
                     <div>
 
@@ -64,7 +73,7 @@ const Profile = (props) => {
                                             <Card.Body>
                                                 <Card.Title>{title}</Card.Title>
 
-                                                <h4 style={{color:"green"}}>{price}.00 USD</h4>
+                                                <h4 style={{ color: "green" }}>{price}.00 USD</h4>
 
                                                 <Link to={{
                                                     pathname: path + creator.toLowerCase(),

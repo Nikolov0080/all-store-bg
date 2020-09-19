@@ -1,14 +1,13 @@
 import React from 'react'
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
+import Notifications from '../../components/notifications/notifications';
 
 const Home = (props) => {
 
     return (
         <ErrorBoundary>
-            <div>
-                Home
-                sdfsdfds
-        </div>
+            <Notifications type="info" message="dsdsdo" show={true}/>
+
         </ErrorBoundary>
 
     )
