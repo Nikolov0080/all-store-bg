@@ -6,14 +6,12 @@ import completeOrder from '../../../firebase/models/user/orders/completeOrder/co
 import Context from '../../../context/context';
 import CompleteModal from '../../components/modals/modalComplete';
 
-const Order = ({ address, orderDetails, refreshOrders }) => {
-    // console.log(address)
-    // console.log(orderDetails)
-   
+const Order = ({ address, orderDetails, refreshOrders }) => { 
 
     const complete = () => {
        
         refreshOrders(true);
+        
     }
 
     const userId = useContext(Context).user.uid
