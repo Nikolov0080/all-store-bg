@@ -57,6 +57,13 @@ const ProductList = (props) => {
                 </Button>
 
                 <ErrorBoundary message='Server do not respond , please try again later'>
+                <Pagination 
+                    products={products}
+                     setCurrentSelect={setCurrentSelect}
+                     perPage={perPage}
+                     setPerPage={setPerPage}
+                     />
+
                     {error !== false ? new Error() : ''}
                     <Row >
                         {currentSelect.map(({ imageUrl, title, price, creatorId, creator, imageId }, index) => {

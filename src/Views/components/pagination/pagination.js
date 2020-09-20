@@ -12,16 +12,16 @@ const Pagination = ({ products, setCurrentSelect, perPage, setPerPage }) => {
     }
 
     const handlePageClick = (data) => {
-
+        window.scrollTo(0, 0);
         const currentValue = (+data.selected * perPage);
         setCurrentSelect(products.slice(currentValue, currentValue + perPage));
-        console.log(currentValue)
+        
     };
 
     useEffect(() => {
         setPageCount(Math.ceil(products.length / perPage));
     }, [products, perPage, setCurrentSelect])
-  
+
     return (
         <div className='text-center mt-5'>
 
@@ -34,21 +34,19 @@ const Pagination = ({ products, setCurrentSelect, perPage, setPerPage }) => {
                 onPageChange={handlePageClick} //
                 containerClassName={'pagination'}
                 subContainerClassName={'pages-item'}
-                activeClassName={'active'}
+                activeLinkClassName={'active'}
             />
             <div className={style.options}>
-                <Form.Label>Products per page</Form.Label>
                 <Form.Control
                     onChange={(e) => changePerPage(e)}
-                    as="select">
-                    <option >5</option>
-                    <option>10</option>
-                    <option>20</option>
+                    as="select"
+                    className={style.selectMenu}
+                    >
+                    <option value="5">Show 5</option>
+                    <option value="10">Show 10</option>
+                    <option value="20">Show 20</option>
                 </Form.Control>
             </div>
-
-
-
         </div>
     )
 }

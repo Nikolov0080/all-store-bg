@@ -2,10 +2,22 @@
   width:24%;
   margin:0 auto;
   font-size: large;
+  background-color: rgb(243, 243, 243);
+  margin-bottom: 20px;
+  box-shadow: 2px 4px #f7f4f4;
+  border-radius: 5px;
 }
 
 option{
 text-align: center;
+border-radius: 22px;
+
+}
+
+.selectMenu{
+  text-align-last:center;
+  
+  font-size: large;
 }
 
 ul{
@@ -17,8 +29,13 @@ ul:left{
  
 }
 li:first-child{
-   border-radius: 20px ,20px,0,0;
+   border-radius: 20px 0px 0px 20px;
 }
+
+li:last-child{
+  border-radius: 0px 20px 20px 0px;
+}
+
 li{
   font-size: large;
   padding-left: 2%;
