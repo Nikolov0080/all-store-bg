@@ -1,0 +1,33 @@
+.options{
+  width:24%;
+  margin:0 auto;
+  font-size: large;
+}
+
+option{
+text-align: center;
+}
+
+ul{
+  display: block;
+}
+
+ul:left{
+  background-color: lightgreen;
+ 
+}
+li:first-child{
+   border-radius: 20px ,20px,0,0;
+}
+li{
+  font-size: large;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: rgb(243, 243, 243);
+}
+
+@media only screen and (max-width: 500px) {
+  .options {
+    width:100%;
+  }
+}
