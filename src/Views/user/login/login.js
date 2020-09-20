@@ -19,7 +19,7 @@ const Login = (props) => {
                 props.history.push({
                     pathname: '/', state: {
                         type: "success",
-                        message: "WELCOME !",
+                        message: "You are now logged in!",
                         show: true
                     }
                 })
