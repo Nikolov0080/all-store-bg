@@ -5,36 +5,22 @@ import style from './productList.module.css';
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
 import getProducts from '../../../firebase/models/products/getProducts/getProducts';
 import Context from '../../../context/context';
-import ReactPaginate from 'react-paginate';
 import Pagination from '../../components/pagination/pagination';
 
-import './style.module.css'
 
 const ProductList = (props) => {
+    const path = `/products/`;
 
     const context = useContext(Context)
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-
-    const [pageCount, setPageCount] = useState(0);
-    const [perPage, setPerPage] = useState(4);
     const [currentSelect, setCurrentSelect] = useState([]);
-
-    const handlePageClick = (data) => {
-        
-        const currentValue = data.selected + 1;
-        setCurrentSelect(value => products.slice(currentValue, currentValue + perPage));
-        console.log(currentValue)
-    };
-
-
-    const path = `/products/`;
+    const [perPage, setPerPage] = useState(5);
 
     useEffect(() => {
         try {
             getProducts(setProducts).then(() => {
-                
                 setLoading(false)
             })
 
@@ -42,14 +28,14 @@ const ProductList = (props) => {
             setError(error)
         }
 
-    }, [])
+    }, []);
+
     useEffect(() => {
-        setPageCount(Math.ceil(products.length / perPage));
-        setCurrentSelect(products.slice(0,perPage))
-    }, [products, perPage])
+        setCurrentSelect(products.slice(0, perPage))
+    }
 
+        , [products,perPage])
 
-    console.log(pageCount)
     if (loading) {
         return (
             <div>
@@ -103,21 +89,13 @@ const ProductList = (props) => {
                             )
                         })}
                     </Row>
-                    <ReactPaginate
-                        previousLabel={'previous'}
-                        nextLabel={'next'}
-                        breakLabel={'...'}
-                        breakClassName={'break-me'}
-                        pageCount={pageCount} //this.state.pageCount
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageClick} //
-                        containerClassName={'pagination'}
-                        subContainerClassName={'pages pagination'}
-                        activeClassName={'active'}
-                    />
 
-                    <Pagination perPage={perPage} />
+                    <Pagination 
+                    products={products}
+                     setCurrentSelect={setCurrentSelect}
+                     perPage={perPage}
+                     setPerPage={setPerPage}
+                     />
                 </ErrorBoundary>
 
             </div>
