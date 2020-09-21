@@ -16,13 +16,6 @@ const Login = (props) => {
         try {
             firebaseLogin(email, password).then((resp) => {
                 console.log(resp)
-                props.history.push({
-                    pathname: '/', state: {
-                        type: "success",
-                        message: "You are now logged in!",
-                        show: true
-                    }
-                })
 
                 if (resp === false) {
                     setErr('Nu such user, or wrong Email or Password')
