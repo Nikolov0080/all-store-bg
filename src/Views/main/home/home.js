@@ -1,19 +1,42 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ErrorBoundary from '../../../errorBoundaries/errorBoundary';
-import Notifications from '../../components/notifications/notifications';
+import Context from '../../../context/context';
+import LoggedView from './loggedView';
+import GuestView from './guestView';
+import Loading from '../../components/loading/loading';
 
-const Home = ({ location }) => {
-    const notificationData = location.state;
+const Home = (props) => {
+
+    const context = useContext(Context);
+    const [auth, setAuth] = useState(false)
+
+    useEffect(() => {
+        setAuth(context.user);
+    }, [context])
+  
+    if (auth === "GUEST") {
+        return (
+            <Loading />
+        )
+    }
+
+    if(auth === null){
+        return(
+            <ErrorBoundary>
+
+
+            <GuestView />
+
+        </ErrorBoundary>
+
+        )
+    }
 
     return (
         <ErrorBoundary>
-            sa
-            {location.state ?
-                <Notifications
-                    type={notificationData.type}
-                    message={notificationData.message} show={true} />
-                : ''
-            }
+
+            <LoggedView />
+
 
         </ErrorBoundary>
 

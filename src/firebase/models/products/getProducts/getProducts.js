@@ -15,10 +15,11 @@ const getProducts = (setProducts) => {
                 const prods = Object.values(item.val());
                 prods.forEach((roughData) => {
                     Object.values(roughData).forEach((productData) => {
-                        getImagePromise(productData.imageId).then((imageResponse) => {
-
+                        if (!productData.hasOwnProperty("address") ) {
+                             getImagePromise(productData.imageId).then((imageResponse) => {
                             return setProducts(oldArray => [...oldArray, { ...productData, imageUrl: imageResponse }]);
-                        })
+                        })}
+                    
                     })
                 })
             }

@@ -7,7 +7,6 @@ import getProducts from '../../../firebase/models/products/getProducts/getProduc
 import Context from '../../../context/context';
 import Pagination from '../../components/pagination/pagination';
 
-
 const ProductList = (props) => {
     const path = `/products/`;
 
@@ -96,15 +95,7 @@ const ProductList = (props) => {
                             )
                         })}
                     </Row>
-
-                    <Pagination 
-                    products={products}
-                     setCurrentSelect={setCurrentSelect}
-                     perPage={perPage}
-                     setPerPage={setPerPage}
-                     />
-                </ErrorBoundary>
-
+               </ErrorBoundary>
             </div>
         )
     }

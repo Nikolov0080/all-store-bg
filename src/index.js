@@ -6,6 +6,7 @@ import './theme/bootstrap.css'
 import PageRouter from './PageRouter';
 import SessionContext from './SessionContext';
 import './firebase/SDK';
+import './main.module.css'
 
 // bootstrap styles <!-- darkly, slate, cosmo, spacelab, and superhero -->
 ReactDOM.render(
